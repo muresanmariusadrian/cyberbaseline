@@ -1,47 +1,47 @@
 # EML — Email Security
 
-> Securitatea comunicațiilor email și protecția împotriva phishing și BEC.
+> Security of email communications and protection against phishing and BEC attacks.
 
-**4 controale** · T1: 4
+**4 controls** · T1: 4
 
 ---
 
-## Controale
+## Controls
 
-### EML-01 — Configurare SPF, DKIM și DMARC `T1`
+### EML-01 — Configure SPF, DKIM, and DMARC `T1`
 
 **NIS2:** Art. 21(2)(h) | **GEO 155:** —
 
-Domeniul de email al organizației trebuie să aibă configurate înregistrările DNS SPF, DKIM și DMARC cu politică minimă `quarantine`. Politica DMARC trebuie monitorizată prin rapoarte agregate (RUA) pentru a detecta utilizarea neautorizată a domeniului.
+The organization's email domain must have SPF, DKIM, and DMARC DNS records configured with a minimum policy of `quarantine`. The DMARC policy must be monitored through aggregate reports (RUA) to detect unauthorized use of the domain.
 
-> **Rationale:** SPF/DKIM/DMARC previn spoofing-ul de domeniu utilizat în atacuri BEC (Business Email Compromise) și phishing. Configurarea corectă este o măsură cu impact ridicat și cost scăzut.
+> **Rationale:** SPF/DKIM/DMARC prevent domain spoofing used in BEC (Business Email Compromise) and phishing attacks. Proper configuration is a high-impact, low-cost measure.
 
 ---
 
-### EML-02 — Filtrare anti-phishing și anti-malware `T1`
+### EML-02 — Anti-phishing and anti-malware filtering `T1`
 
 **NIS2:** Art. 21(2)(b) | **GEO 155:** Art. 5(1)(c)
 
-Implementarea unui gateway de email cu capacități avansate de filtrare anti-phishing, detecție URL malițioase și sandbox pentru atașamente (Microsoft Defender for Office 365, Proofpoint, Mimecast). Filtrarea trebuie activată pentru toți utilizatorii.
+Deploy an email gateway with advanced anti-phishing filtering, malicious URL detection, and attachment sandboxing (Microsoft Defender for Office 365, Proofpoint, Mimecast). Filtering must be enabled for all users.
 
-> **Rationale:** Peste 90% din incidentele de securitate încep cu un email malițios. Un gateway de email modern blochează amenințările înainte să ajungă la utilizatori.
+> **Rationale:** Over 90% of security incidents start with a malicious email. A modern email gateway blocks threats before they reach users.
 
 ---
 
-### EML-03 — Marcarea emailurilor externe `T1`
+### EML-03 — External email tagging `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Toate emailurile provenite din afara organizației trebuie marcate vizibil cu un banner sau prefix de subiect (ex: `[EXTERN]`) pentru a alerta utilizatorii la tentative de impersonare a colegilor sau conducerii.
+All emails originating from outside the organization must be visibly tagged with a banner or subject prefix (e.g., `[EXTERNAL]`) to alert users to impersonation attempts of colleagues or management.
 
-> **Rationale:** Atacurile BEC exploatează dificultatea utilizatorilor de a distinge emailurile interne de cele externe. Marcarea vizibilă reduce semnificativ eficiența acestor atacuri.
+> **Rationale:** BEC attacks exploit the difficulty users have in distinguishing internal from external emails. Visible tagging significantly reduces the effectiveness of these attacks.
 
 ---
 
-### EML-04 — Dezactivarea macro-urilor Office în emailuri `T1`
+### EML-04 — Disable Office macros in emails `T1`
 
 **NIS2:** Art. 21(2)(b) | **GEO 155:** —
 
-Macro-urile din documentele Office primite prin email trebuie dezactivate implicit prin Group Policy sau Intune. Excepțiile necesită aprobare IT și trebuie limitate la surse de încredere verificate.
+Macros in Office documents received via email must be disabled by default through Group Policy or Intune. Exceptions require IT approval and must be limited to verified trusted sources.
 
-> **Rationale:** Macro-urile malițioase în documente Office sunt un vector de livrare malware extrem de frecvent. Dezactivarea lor implicit elimină o clasă întreagă de atacuri.
+> **Rationale:** Malicious macros in Office documents are an extremely common malware delivery vector. Disabling them by default eliminates an entire class of attacks.

@@ -1,77 +1,77 @@
-# NET — Rețea & Infrastructură
+# NET — Network & Infrastructure
 
-> Securitatea rețelei, perimetrului, accesului remote și infrastructurii cloud.
+> Security of the network perimeter, remote access, and cloud infrastructure.
 
-**7 controale** · T1: 6 · T3: 1
+**7 controls** · T1: 6 · T3: 1
 
 ---
 
-## Controale
+## Controls
 
-### NET-01 — Firewall perimetral cu reguli implicite de blocare `T1`
+### NET-01 — Perimeter firewall with default-deny rules `T1`
 
 **NIS2:** Art. 21(2)(h) | **GEO 155:** Art. 5(1)(d)
 
-Firewall-ul perimetral trebuie configurat cu politică default-deny pentru traficul inbound. Doar porturile și serviciile explicit necesare trebuie deschise. Regulile trebuie documentate și revizuite semestrial.
+The perimeter firewall must be configured with a default-deny policy for inbound traffic. Only explicitly required ports and services should be open. Rules must be documented and reviewed semi-annually.
 
-> **Rationale:** Un firewall perimetral corect configurat blochează scanările automate și exploatarea serviciilor expuse inadvertent pe internet.
+> **Rationale:** A properly configured perimeter firewall blocks automated scans and exploitation of inadvertently exposed services.
 
 ---
 
-### NET-02 — VPN pentru acces remote `T1`
+### NET-02 — VPN for remote access `T1`
 
 **NIS2:** Art. 21(2)(i) | **GEO 155:** —
 
-Accesul remote la resursele organizației trebuie realizat exclusiv prin VPN cu autentificare MFA. RDP, SMB și alte protocoale de management nu trebuie expuse direct pe internet. Se recomandă arhitecturi Zero Trust Network Access (ZTNA) ca alternativă modernă.
+Remote access to organizational resources must be done exclusively through a VPN with MFA authentication. RDP, SMB, and other management protocols must not be directly exposed to the internet. Zero Trust Network Access (ZTNA) architectures are recommended as a modern alternative.
 
-> **Rationale:** RDP expus pe internet este vectorul #1 pentru atacuri ransomware. VPN-ul cu MFA elimină această suprafață de atac critică.
+> **Rationale:** Internet-exposed RDP is the #1 vector for ransomware attacks. VPN with MFA eliminates this critical attack surface.
 
 ---
 
-### NET-03 — Filtrare DNS protectivă `T1`
+### NET-03 — Protective DNS filtering `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Implementarea unui resolver DNS cu filtrare a domeniilor malițioase (Cloudflare Gateway, Cisco Umbrella, CERT-RO DNS). Toate dispozitivele organizației trebuie să folosească exclusiv DNS-ul organizației. Modificarea DNS de către utilizatori trebuie blocată.
+Deploy a DNS resolver with malicious domain filtering (Cloudflare Gateway, Cisco Umbrella, CERT-RO DNS). All organizational devices must exclusively use the organization's DNS. User modification of DNS settings must be blocked.
 
-> **Rationale:** DNS protectiv blochează comunicațiile malware cu serverele de comandă și control (C2) și accesul la domenii phishing, chiar după infecția inițială.
+> **Rationale:** Protective DNS blocks malware communication with command-and-control (C2) servers and access to phishing domains, even after an initial infection.
 
 ---
 
-### NET-04 — Rețea WiFi separată pentru oaspeți `T1`
+### NET-04 — Separate guest WiFi network `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Oaspeții și dispozitivele personale ale angajaților trebuie conectați la o rețea WiFi separată, izolată complet de rețeaua corporativă. Rețeaua de oaspeți trebuie să ofere acces doar la internet, fără acces la resurse interne.
+Guests and employees' personal devices must be connected to a separate WiFi network, completely isolated from the corporate network. The guest network must provide internet access only, with no access to internal resources.
 
-> **Rationale:** Rețelele WiFi mixte (corporative + oaspeți) permit atacuri de tip ARP spoofing și pivot spre resursele interne. Separarea este o măsură simplă cu impact mare.
+> **Rationale:** Mixed WiFi networks (corporate + guests) enable ARP spoofing attacks and pivoting to internal resources. Separation is a simple measure with high impact.
 
 ---
 
-### NET-05 — Configurare securizată a conturilor cloud `T1`
+### NET-05 — Secure cloud account configuration `T1`
 
 **NIS2:** Art. 21(2)(e) | **GEO 155:** —
 
-Conturile cloud (Azure, AWS, GCP) trebuie configurate conform CIS Benchmarks pentru furnizorul respectiv. Activarea centrului de securitate cloud (Microsoft Defender for Cloud, AWS Security Hub) pentru detectarea configurărilor greșite.
+Cloud accounts (Azure, AWS, GCP) must be configured according to CIS Benchmarks for the respective provider. Enable cloud security centers (Microsoft Defender for Cloud, AWS Security Hub) for misconfiguration detection.
 
-> **Rationale:** Configurările greșite cloud sunt cauza #1 a breșelor în mediile cloud. CIS Benchmarks oferă un baseline concret și verificabil pentru securizarea conturilor cloud.
+> **Rationale:** Cloud misconfigurations are the #1 cause of breaches in cloud environments. CIS Benchmarks provide a concrete, verifiable baseline for securing cloud accounts.
 
 ---
 
-### NET-06 — Dezactivarea accesului public la storage cloud `T1`
+### NET-06 — Disable public access to cloud storage `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Containerele de storage cloud (Azure Blob, AWS S3, Google Cloud Storage) nu trebuie să fie accesibile public implicit. Accesul public trebuie dezactivat la nivel de cont și monitorizat continuu pentru reactivare accidentală.
+Cloud storage containers (Azure Blob, AWS S3, Google Cloud Storage) must not be publicly accessible by default. Public access must be disabled at the account level and continuously monitored for accidental re-enablement.
 
-> **Rationale:** Bucket-urile S3 și containerele Blob publice accidental sunt sursa unor dintre cele mai mari breșe de date. Dezactivarea implicită a accesului public previne scurgerile prin configurare greșită.
+> **Rationale:** Accidentally public S3 buckets and Blob containers are the source of some of the largest data breaches. Disabling public access by default prevents leaks through misconfiguration.
 
 ---
 
-### NET-07 — Testare de penetrare periodică `T3`
+### NET-07 — Periodic penetration testing `T3`
 
 **NIS2:** Art. 21(2)(e) | **GEO 155:** Art. 6(1)
 
-Efectuarea unui test de penetrare extern anual și intern bianual, realizat de un furnizor terț autorizat. Vulnerabilitățile critice identificate trebuie remediate în 30 de zile, cele înalte în 90 de zile.
+Conduct an annual external penetration test and bi-annual internal test, performed by an authorized third-party provider. Critical vulnerabilities identified must be remediated within 30 days, high-severity within 90 days.
 
-> **Rationale:** Testele de penetrare identifică vulnerabilități reale înainte ca atacatorii să le exploateze. Sunt obligatorii pentru organizațiile NIS2 din sectoare esențiale.
+> **Rationale:** Penetration tests identify real vulnerabilities before attackers exploit them. They are mandatory for NIS2 organizations in essential sectors.

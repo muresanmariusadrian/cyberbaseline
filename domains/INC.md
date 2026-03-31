@@ -1,57 +1,57 @@
 # INC — Incident Management
 
-> Răspuns la incidente, notificare NIS2, logging și investigare criminalistică.
+> Incident response, NIS2 notification, logging, and digital forensics.
 
-**5 controale** · T1: 2 · T2: 2 · T3: 1
+**5 controls** · T1: 2 · T2: 2 · T3: 1
 
 ---
 
-## Controale
+## Controls
 
-### INC-01 — Plan documentat de răspuns la incidente `T1`
+### INC-01 — Documented incident response plan `T1`
 
 **NIS2:** Art. 21(2)(c) | **GEO 155:** Art. 7(1)
 
-Organizația trebuie să aibă un plan documentat de răspuns la incidente de securitate cibernetică, cu roluri și responsabilități definite, proceduri de escaladare, contacte externe (CERT-RO, ANSSI, furnizori IR) și criterii de clasificare a incidentelor.
+The organization must have a documented cybersecurity incident response plan with defined roles and responsibilities, escalation procedures, external contacts (CERT-RO, ANSSI, IR providers), and incident classification criteria.
 
-> **Rationale:** Organizațiile fără plan de răspuns pierd în medie 3x mai mult timp să conțină un incident. Planul documentat transformă haosul inevitabil al unui incident în acțiuni coordonate.
+> **Rationale:** Organizations without a response plan take on average 3x longer to contain an incident. A documented plan turns the inevitable chaos of an incident into coordinated actions.
 
 ---
 
-### INC-02 — Notificarea incidentelor NIS2 în 24/72 ore `T1`
+### INC-02 — NIS2 incident notification within 24/72 hours `T1`
 
 **NIS2:** Art. 23(4) | **GEO 155:** Art. 9(1)
 
-Organizațiile NIS2 trebuie să notifice DNSC (Directoratul Național de Securitate Cibernetică) în maximum 24 ore de la detectarea unui incident semnificativ (notificare preliminară) și în 72 ore cu detalii complete. Procedura de notificare trebuie documentată.
+NIS2 organizations must notify DNSC (National Directorate of Cyber Security) within 24 hours of detecting a significant incident (preliminary notification) and within 72 hours with full details. The notification procedure must be documented.
 
-> **Rationale:** Termenele de notificare NIS2 sunt obligatorii legal. Nerespectarea lor atrage amenzi semnificative. Procedura pre-documentată asigură că notificarea se face în timp, chiar în condiții de criză.
+> **Rationale:** NIS2 notification deadlines are legally mandatory. Non-compliance carries significant fines. A pre-documented procedure ensures notification happens on time, even under crisis conditions.
 
 ---
 
-### INC-03 — Logging centralizat și SIEM `T2`
+### INC-03 — Centralized logging and SIEM `T2`
 
 **NIS2:** Art. 21(2)(b) | **GEO 155:** —
 
-Logurile din toate sistemele critice (AD, firewall, endpoint, cloud, aplicații) trebuie colectate centralizat într-un SIEM (Microsoft Sentinel, Splunk, Elastic SIEM). Retenție minimum 12 luni, alertare automată pentru evenimentele de securitate.
+Logs from all critical systems (AD, firewall, endpoint, cloud, applications) must be centrally collected in a SIEM (Microsoft Sentinel, Splunk, Elastic SIEM). Minimum 12-month retention, automatic alerting for security events.
 
-> **Rationale:** Fără logging centralizat, investigarea incidentelor este lentă și incompletă. SIEM reduce timpul mediu de detecție (MTTD) și oferă baza pentru alertare proactivă.
-
----
-
-### INC-04 — Capacitate de izolare a sistemelor compromise `T2`
-
-**NIS2:** Art. 21(2)(c) | **GEO 155:** —
-
-Proceduri documentate și testate pentru izolarea rapidă a sistemelor sau segmentelor de rețea compromise. Capabilitate de izolare în maximum 30 minute de la decizie. Acces out-of-band pentru administrare post-izolare.
-
-> **Rationale:** Viteza de izolare este factorul cel mai critic în limitarea propagării ransomware. Fiecare minut de întârziere permite criptarea mai multor sisteme.
+> **Rationale:** Without centralized logging, incident investigation is slow and incomplete. SIEM reduces mean time to detect (MTTD) and provides the basis for proactive alerting.
 
 ---
 
-### INC-05 — Investigare criminalistică digitală (forensics) `T3`
+### INC-04 — Capability to isolate compromised systems `T2`
 
 **NIS2:** Art. 21(2)(c) | **GEO 155:** —
 
-Organizația trebuie să aibă acces la capabilități de investigare criminalistică digitală, fie intern (instruire, instrumente) fie prin contract cu un furnizor IR. Procesele de colectare și prezervare a dovezilor digitale trebuie documentate.
+Documented and tested procedures for rapidly isolating compromised systems or network segments. Isolation capability within 30 minutes of the decision. Out-of-band access for post-isolation administration.
 
-> **Rationale:** Investigarea criminalistică este necesară pentru înțelegerea completă a unui incident, identificarea vectorului de atac și prevenirea recidivei. Fără ea, aceleași vulnerabilități rămân exploatabile.
+> **Rationale:** Isolation speed is the most critical factor in limiting ransomware propagation. Every minute of delay allows more systems to be encrypted.
+
+---
+
+### INC-05 — Digital forensics capability `T3`
+
+**NIS2:** Art. 21(2)(c) | **GEO 155:** —
+
+The organization must have access to digital forensics capabilities, either internally (training, tools) or through a contract with an IR provider. Evidence collection and preservation processes must be documented.
+
+> **Rationale:** Digital forensics is necessary for fully understanding an incident, identifying the attack vector, and preventing recurrence. Without it, the same vulnerabilities remain exploitable.

@@ -1,113 +1,110 @@
 # CyberBaseline
 
-**Standardul de securitate cibernetică pentru IMM-uri din România**
+**The cybersecurity baseline standard for Romanian SMBs**
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![NIS2](https://img.shields.io/badge/NIS2-aliniat-blue)](https://eur-lex.europa.eu/legal-content/RO/TXT/?uri=CELEX:32022L2555)
-[![GEO 155/2024](https://img.shields.io/badge/GEO%20155%2F2024-aliniat-blue)](https://legislatie.just.ro)
+[![NIS2](https://img.shields.io/badge/NIS2-aligned-blue)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555)
+[![GEO 155/2024](https://img.shields.io/badge/GEO%20155%2F2024-aligned-blue)](https://legislatie.just.ro)
 
-Un framework open-source de securitate cibernetică conceput pentru organizații fără echipe dedicate de securitate. **31 de controale practice**, organizate în **6 domenii** și **3 niveluri de maturitate**, aliniate la NIS2 și GEO 155/2024.
-
-**Website:** [cyberbaseline.ro](https://cyberbaseline.ro) *(în curând)*
+An open-source cybersecurity framework designed for organizations without dedicated security teams. **31 practical controls**, organized across **6 domains** and **3 maturity tiers**, aligned with NIS2 and Romanian GEO 155/2024.
 
 ---
 
-## De ce CyberBaseline?
+## Why CyberBaseline?
 
-80% din riscul de breșă provine din 20% din controale. Pentru IMM-urile din România, amenințările principale sunt:
+80% of breach risk comes from 20% of controls. For Romanian SMBs, the primary threats are:
 
-1. **Phishing și BEC** — prin email
-2. **Ransomware** — prin endpoint sau RDP expus
-3. **Compromiterea credențialelor** — parole slabe, fără MFA
-4. **Servicii expuse** — RDP, SMB, porturi de management deschise pe internet
+1. **Phishing and BEC** — via email
+2. **Ransomware** — via endpoint or exposed RDP
+3. **Credential compromise** — weak passwords, no MFA
+4. **Exposed services** — RDP, SMB, management ports open to the internet
 
-CyberBaseline este construit în jurul acestor amenințări reale, nu al unei taxonomii academice exhaustive.
+CyberBaseline is built around these real threats, not an exhaustive academic taxonomy.
 
 ---
 
-## Structura framework-ului
+## Framework structure
 
-### Domenii de control
+### Security domains
 
-| Abbr | Domeniu | Controale |
-|------|---------|-----------|
+| Abbr | Domain | Controls |
+|------|--------|----------|
 | [IAM](domains/IAM.md) | Identity & Access Management | 6 |
 | [EML](domains/EML.md) | Email Security | 4 |
-| [NET](domains/NET.md) | Rețea & Infrastructură | 7 |
+| [NET](domains/NET.md) | Network & Infrastructure | 7 |
 | [EPT](domains/EPT.md) | Endpoint Protection | 4 |
 | [DAT](domains/DAT.md) | Data Protection | 5 |
 | [INC](domains/INC.md) | Incident Management | 5 |
 
-**Total: 31 controale**
+**Total: 31 controls**
 
-### Niveluri de maturitate
+### Maturity tiers
 
-| Nivel | Label | Controale | Descriere |
-|-------|-------|-----------|-----------|
-| T1 | **Esențial** | 26 | Controale de bază, obligatorii pentru conformitate NIS2 minimă. Implementabile rapid, cu impact imediat. |
-| T2 | **Avansat** | 3 | Controale recomandate pentru organizații cu risc moderat sau date sensibile. |
-| T3 | **Rezistent** | 2 | Controale pentru organizații din sectoare esențiale sau critice conform NIS2. |
-
----
-
-## Conformitate NIS2 și GEO 155/2024
-
-Toate controalele sunt mapate la articolele relevante din:
-- **Directiva NIS2** (UE 2022/2555)
-- **GEO 155/2024** — transpunerea NIS2 în legislația română
-
-Organizațiile din sectoare esențiale (energie, transport, sănătate, financiar, apă, infrastructură digitală) și importante (servicii poștale, gestionarea deșeurilor, producție, servicii digitale) au obligații legale de conformitate.
+| Tier | Label | Controls | Description |
+|------|-------|----------|-------------|
+| T1 | **Essential** | 26 | Foundational controls required for minimum NIS2 compliance. Fast to implement, immediate impact. |
+| T2 | **Advanced** | 3 | Recommended for organizations with moderate risk profiles or sensitive data. |
+| T3 | **Resilient** | 2 | Controls for organizations in essential or important sectors under NIS2. |
 
 ---
 
-## Cum să folosești framework-ul
+## NIS2 and GEO 155/2024 compliance
 
-### 1. Evaluează nivelul actual
-Parcurge controalele T1 și bifează ce ai implementat deja. Majoritatea IMM-urilor implementează 40-60% din T1 fără să știe.
+All controls are mapped to relevant articles in:
+- **NIS2 Directive** (EU 2022/2555)
+- **GEO 155/2024** — NIS2 transposition into Romanian law
 
-### 2. Prioritizează pe baza riscului
-Începe cu:
-- **IAM-01** (MFA pentru admini) — impact maxim, efort minim
-- **EPT-02** (patch management) — elimină 60%+ din vectorii de atac
-- **DAT-02** (backup 3-2-1) — protecție împotriva ransomware
-- **EML-01** (SPF/DKIM/DMARC) — oprește spoofing-ul de domeniu
-
-### 3. Documentează implementarea
-Fiecare control are criterii clare. Documentează ce ai implementat, când și cum — util pentru audituri și notificări NIS2.
-
-### 4. Extinde la T2 și T3
-Odată cu implementarea completă T1, evaluează controalele T2 în funcție de profilul de risc al organizației.
+Organizations in essential sectors (energy, transport, health, finance, water, digital infrastructure) and important sectors (postal, waste management, manufacturing, digital services) have legal compliance obligations.
 
 ---
 
-## Fișiere
+## How to use this framework
 
-| Fișier | Conținut |
-|--------|----------|
-| [`controls.json`](controls.json) | Toate controalele în format JSON (sursă de adevăr) |
+### 1. Assess your current state
+Go through T1 controls and check what you already have in place. Most SMBs implement 40–60% of T1 without realizing it.
+
+### 2. Prioritize by impact
+Start with:
+- **IAM-01** (MFA for admins) — maximum impact, minimum effort
+- **EPT-02** (patch management) — eliminates 60%+ of attack vectors
+- **DAT-02** (3-2-1 backup) — ransomware last line of defense
+- **EML-01** (SPF/DKIM/DMARC) — stops domain spoofing
+
+### 3. Document your implementation
+Each control has clear criteria. Document what you've implemented, when, and how — useful for audits and NIS2 notifications.
+
+### 4. Progress to T2 and T3
+Once T1 is fully implemented, evaluate T2 controls based on your organization's risk profile.
+
+---
+
+## Files
+
+| File | Contents |
+|------|----------|
+| [`controls.json`](controls.json) | All controls in JSON format (source of truth) |
 | [`domains/IAM.md`](domains/IAM.md) | Identity & Access Management |
 | [`domains/EML.md`](domains/EML.md) | Email Security |
-| [`domains/NET.md`](domains/NET.md) | Rețea & Infrastructură |
+| [`domains/NET.md`](domains/NET.md) | Network & Infrastructure |
 | [`domains/EPT.md`](domains/EPT.md) | Endpoint Protection |
 | [`domains/DAT.md`](domains/DAT.md) | Data Protection |
 | [`domains/INC.md`](domains/INC.md) | Incident Management |
 
 ---
 
-## Contribuții
+## Contributing
 
-Contribuțiile sunt binevenite — în special:
-- Corecturi sau clarificări ale descrierilor de controale
-- Mapări suplimentare NIS2 / GEO 155
-- Traduceri în engleză
-- Exemple practice de implementare
+Contributions are welcome — especially:
+- Corrections or clarifications to control descriptions
+- Additional NIS2 / GEO 155 mappings
+- Practical implementation examples
 
-Deschide un **Issue** pentru discuții sau un **Pull Request** pentru modificări directe.
+Open an **Issue** for discussion or a **Pull Request** for direct changes.
 
 ---
 
-## Licență
+## License
 
-CyberBaseline este licențiat sub [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
+CyberBaseline is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
 
-Poți folosi, adapta și redistribui liber, cu condiția să menționezi sursa.
+Free to use, adapt, and redistribute with attribution.

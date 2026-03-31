@@ -1,47 +1,47 @@
 # EPT — Endpoint Protection
 
-> Protecția dispozitivelor, patch management și inventarul activelor.
+> Protection of devices, patch management, and asset inventory.
 
-**4 controale** · T1: 4
+**4 controls** · T1: 4
 
 ---
 
-## Controale
+## Controls
 
-### EPT-01 — Soluție EDR pe toate dispozitivele `T1`
+### EPT-01 — EDR solution on all devices `T1`
 
 **NIS2:** Art. 21(2)(b) | **GEO 155:** Art. 5(1)(c)
 
-Toate dispozitivele gestionate (laptopuri, desktop-uri, servere) trebuie să ruleze o soluție de tip Endpoint Detection & Response (EDR). Acoperirea trebuie monitorizată și menținută la 100%. Alertele critice trebuie investigate în 24 de ore.
+All managed devices (laptops, desktops, servers) must run an Endpoint Detection & Response (EDR) solution. Coverage must be monitored and maintained at 100%. Critical alerts must be investigated within 24 hours.
 
-> **Rationale:** EDR oferă vizibilitate și capacitate de răspuns la amenințări avansate care depășesc capabilitățile antivirus tradițional. Este componenta de bază a protecției endpoint moderne.
+> **Rationale:** EDR provides visibility and response capability against advanced threats that exceed traditional antivirus capabilities. It is the foundational component of modern endpoint protection.
 
 ---
 
-### EPT-02 — Patch management automatizat `T1`
+### EPT-02 — Automated patch management `T1`
 
 **NIS2:** Art. 21(2)(e) | **GEO 155:** Art. 5(1)(e)
 
-Actualizările de securitate critice trebuie aplicate în maximum 72 de ore de la disponibilitate pe toate sistemele. Patch-urile importante trebuie aplicate în 7 zile. Sistemele neactualizate trebuie izolate sau remediate urgent.
+Critical security updates must be applied within 72 hours of availability across all systems. Important patches must be applied within 7 days. Unpatched systems must be isolated or urgently remediated.
 
-> **Rationale:** Exploatarea vulnerabilităților nepatchuite este cauza a peste 60% din breșele de securitate. Patch management-ul automatizat reduce fereastra de expunere la minimum.
-
----
-
-### EPT-03 — Criptarea completă a discurilor pe laptopuri `T1`
-
-**NIS2:** — | **GEO 155:** —
-
-Toate laptopurile și dispozitivele portabile trebuie să aibă criptarea completă a discului activată (BitLocker pe Windows, FileVault pe macOS). Cheile de recuperare trebuie stocate centralizat în Azure AD sau un vault securizat.
-
-> **Rationale:** Pierderea sau furtul unui laptop necriptat constituie breșă de date raportabilă ANSPDCP. Criptarea discului protejează datele organizației fără a afecta utilizabilitatea.
+> **Rationale:** Exploitation of unpatched vulnerabilities causes over 60% of security breaches. Automated patch management reduces the exposure window to a minimum.
 
 ---
 
-### EPT-04 — Inventarul hardware și software `T1`
+### EPT-03 — Full disk encryption on laptops `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Menținerea unui inventar actualizat al tuturor dispozitivelor hardware și aplicațiilor software din organizație. Descoperire automată prin scanare de rețea. Revizuire lunară pentru identificarea activelor neautorizate.
+All laptops and portable devices must have full disk encryption enabled (BitLocker on Windows, FileVault on macOS). Recovery keys must be stored centrally in Azure AD or a secure vault.
 
-> **Rationale:** Nu poți proteja ceea ce nu știi că există. Inventarul complet este prerequisitul oricărui program de securitate eficient și baza pentru patch management și monitorizare.
+> **Rationale:** Loss or theft of an unencrypted laptop constitutes a reportable data breach. Disk encryption protects organizational data without affecting usability.
+
+---
+
+### EPT-04 — Hardware and software asset inventory `T1`
+
+**NIS2:** — | **GEO 155:** —
+
+Maintain an up-to-date inventory of all hardware devices and software applications in the organization. Automatic discovery through network scanning. Monthly review to identify unauthorized assets.
+
+> **Rationale:** You can't protect what you don't know exists. A complete inventory is the prerequisite for any effective security program and the foundation for patch management and monitoring.

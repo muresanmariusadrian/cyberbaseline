@@ -1,67 +1,67 @@
 # IAM — Identity & Access Management
 
-> Gestionarea identităților, accesului și secretelor utilizatorilor la sisteme și date.
+> Management of user identities, access rights, and credentials across systems and data.
 
-**6 controale** · T1: 5 · T2: 1
+**6 controls** · T1: 5 · T2: 1
 
 ---
 
-## Controale
+## Controls
 
-### IAM-01 — Autentificare multifactor pentru conturi privilegiate `T1`
+### IAM-01 — Multi-factor authentication for privileged accounts `T1`
 
 **NIS2:** Art. 21(2)(i) | **GEO 155:** Art. 5(1)(a)
 
-Toate conturile cu privilegii administrative (administratori de sistem, IT, cloud) trebuie să utilizeze autentificare multifactor (MFA/2FA). Factorul suplimentar poate fi o aplicație TOTP (Google Authenticator, Microsoft Authenticator) sau un token hardware FIDO2.
+All accounts with administrative privileges (system, IT, cloud administrators) must use multi-factor authentication (MFA/2FA). The second factor can be a TOTP app (Google Authenticator, Microsoft Authenticator) or a FIDO2 hardware token.
 
-> **Rationale:** Compromiterea conturilor privilegiate fără MFA este vectorul principal de atac în breșele care afectează IMM-urile. MFA blochează peste 99% din atacurile automate de credential stuffing.
+> **Rationale:** Compromised privileged accounts without MFA is the primary attack vector in SMB breaches. MFA blocks over 99% of automated credential stuffing attacks.
 
 ---
 
-### IAM-02 — Politică de parole complexe `T1`
+### IAM-02 — Strong password policy `T1`
 
 **NIS2:** Art. 21(2)(i) | **GEO 155:** —
 
-Toate conturile de utilizator trebuie să folosească parole cu minimum 12 caractere, evitând parolele din liste de breșe cunoscute. Se recomandă implementarea unui manager de parole organizațional (Bitwarden Teams, 1Password Business) în locul rotației forțate periodice.
+All user accounts must use passwords with a minimum of 12 characters, avoiding passwords from known breach lists. Using an organizational password manager (Bitwarden Teams, 1Password Business) is recommended over forced periodic rotation.
 
-> **Rationale:** Parolele slabe sau reutilizate reprezintă vectorul de atac #1 în breșele care afectează IMM-urile. Un manager de parole elimină reutilizarea și simplifică respectarea politicii.
+> **Rationale:** Weak or reused passwords are the #1 attack vector in SMB breaches. A password manager eliminates reuse and simplifies policy enforcement.
 
 ---
 
-### IAM-03 — Principiul privilegiului minim `T1`
+### IAM-03 — Least privilege principle `T1`
 
 **NIS2:** Art. 21(2)(i) | **GEO 155:** Art. 5(1)(b)
 
-Utilizatorii trebuie să aibă doar permisiunile necesare pentru sarcinile de serviciu. Conturile administrative separate de cele de zi cu zi, revizuire trimestrială a accesurilor, revocare imediată la schimbarea rolului sau plecarea din organizație.
+Users must have only the permissions necessary for their job duties. Administrative accounts should be separate from day-to-day accounts. Quarterly access reviews and immediate revocation upon role change or departure.
 
-> **Rationale:** Accesul excesiv amplifică impactul unui cont compromis. Principiul least privilege este una din cele mai eficiente măsuri de limitare a propagării laterale.
+> **Rationale:** Excessive access amplifies the impact of a compromised account. Least privilege is one of the most effective measures for limiting lateral movement.
 
 ---
 
-### IAM-04 — Dezactivarea conturilor inactive `T1`
+### IAM-04 — Disable inactive accounts `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Conturile de utilizator inactive mai mult de 30 de zile trebuie dezactivate automat. Conturile foștilor angajați trebuie revocate în ziua plecării. Procesul trebuie integrat cu procedura de offboarding HR.
+User accounts inactive for more than 30 days must be automatically disabled. Former employee accounts must be revoked on their last day. The process must be integrated with the HR offboarding procedure.
 
-> **Rationale:** Conturile abandonate sunt o poartă de intrare frecventă pentru atacatori. Automatizarea dezactivării elimină dependența de procese manuale eronate.
+> **Rationale:** Abandoned accounts are a frequent entry point for attackers. Automated deactivation eliminates dependency on error-prone manual processes.
 
 ---
 
-### IAM-05 — Revizuirea periodică a drepturilor de acces `T2`
+### IAM-05 — Periodic access rights review `T2`
 
 **NIS2:** Art. 21(2)(i) | **GEO 155:** Art. 5(2)
 
-Revizuire formală trimestrială a tuturor accesurilor privilegiate și semestrială pentru accesurile standard. Procesul trebuie documentat și aprobat de manageri de linie, nu de IT.
+Formal quarterly review of all privileged access and semi-annual review of standard access. The process must be documented and approved by line managers, not IT.
 
-> **Rationale:** Acumularea de privilegii în timp (privilege creep) este un risc major în organizații cu fluctuație de personal. Revizuirile periodice mențin principiul least privilege operațional.
+> **Rationale:** Privilege creep over time is a major risk in organizations with staff turnover. Periodic reviews keep the least privilege principle operational.
 
 ---
 
-### IAM-06 — Gestionarea secretelor și credențialelor cu vault `T1`
+### IAM-06 — Secrets and credentials management with a vault `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Credențialele, cheile API, șirurile de conexiune la baze de date și alte secrete nu trebuie hard-codate în cod sau stocate în variabile de mediu text clar. Trebuie utilizat un serviciu de vault (Azure Key Vault, AWS Secrets Manager, HashiCorp Vault).
+Credentials, API keys, database connection strings, and other secrets must not be hard-coded in source code or stored in plaintext environment variables. A vault service must be used (Azure Key Vault, AWS Secrets Manager, HashiCorp Vault).
 
-> **Rationale:** Secretele în cod sursă sau variabile de mediu sunt expuse frecvent prin repository-uri publice sau acces neautorizat. Un vault centralizat oferă rotație, audit și acces granular.
+> **Rationale:** Secrets in source code or environment variables are frequently exposed through public repositories or unauthorized access. A centralized vault provides rotation, auditing, and granular access control.

@@ -1,57 +1,57 @@
 # DAT — Data Protection
 
-> Protecția, clasificarea, backup-ul și guvernanța datelor organizației.
+> Protection, classification, backup, and governance of organizational data.
 
-**5 controale** · T1: 5
+**5 controls** · T1: 5
 
 ---
 
-## Controale
+## Controls
 
-### DAT-01 — Clasificarea datelor organizației `T1`
+### DAT-01 — Data classification `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Toate datele gestionate de organizație trebuie clasificate în categorii (Public, Intern, Confidențial, Secret) cu politici clare de gestionare pentru fiecare categorie. Clasificarea trebuie documentată și comunicată angajaților.
+All data managed by the organization must be classified into categories (Public, Internal, Confidential, Secret) with clear handling policies for each category. Classification must be documented and communicated to employees.
 
-> **Rationale:** Fără clasificare, organizația nu știe ce date trebuie protejate cel mai strict. Clasificarea este fundația pe care se construiesc toate celelalte controale de protecție a datelor.
+> **Rationale:** Without classification, the organization doesn't know which data needs the strictest protection. Classification is the foundation on which all other data protection controls are built.
 
 ---
 
-### DAT-02 — Backup 3-2-1 pentru date critice `T1`
+### DAT-02 — 3-2-1 backup for critical data `T1`
 
 **NIS2:** Art. 21(2)(c) | **GEO 155:** Art. 5(1)(f)
 
-Datele critice trebuie să urmeze regula 3-2-1: minim 3 copii, pe 2 medii diferite, cu 1 copie off-site sau în cloud. Backup-urile trebuie testate prin restaurare completă cel puțin trimestrial și protejate împotriva ransomware prin copii imutabile.
+Critical data must follow the 3-2-1 rule: at least 3 copies, on 2 different media, with 1 copy off-site or in the cloud. Backups must be tested via full restoration at least quarterly and protected against ransomware through immutable copies.
 
-> **Rationale:** Backup-ul este ultima linie de apărare împotriva ransomware. Copiile imutabile off-site fac recuperarea posibilă chiar dacă toate sistemele locale sunt criptate.
+> **Rationale:** Backup is the last line of defense against ransomware. Immutable off-site copies make recovery possible even if all local systems are encrypted.
 
 ---
 
-### DAT-03 — Criptarea datelor în tranzit (TLS) `T1`
+### DAT-03 — Data in transit encryption (TLS) `T1`
 
 **NIS2:** Art. 21(2)(h) | **GEO 155:** —
 
-Tot traficul de rețea care conține date sensibile trebuie criptat cu TLS 1.2 sau 1.3. Certificatele SSL trebuie gestionate și reînnoite automat (Let's Encrypt, Azure Certificate Manager). HTTP plain trebuie redirecționat la HTTPS.
+All network traffic containing sensitive data must be encrypted with TLS 1.2 or 1.3. SSL certificates must be managed and renewed automatically (Let's Encrypt, Azure Certificate Manager). Plain HTTP must be redirected to HTTPS.
 
-> **Rationale:** Datele transmise necriptat pot fi interceptate în orice punct al rețelei. TLS este standardul minim și este obligatoriu pentru orice serviciu web sau API.
+> **Rationale:** Data transmitted unencrypted can be intercepted at any point in the network. TLS is the minimum standard and is mandatory for any web service or API.
 
 ---
 
-### DAT-04 — Registrul activităților de prelucrare (GDPR Art. 30) `T1`
+### DAT-04 — Record of processing activities (GDPR Art. 30) `T1`
 
 **NIS2:** — | **GEO 155:** —
 
-Organizația trebuie să mențină un registru actualizat al activităților de prelucrare a datelor cu caracter personal, conform GDPR Art. 30. Registrul trebuie să includă scopul, categoriile de date, termenul de retenție și transferurile internaționale.
+The organization must maintain an up-to-date record of personal data processing activities, in accordance with GDPR Art. 30. The record must include the purpose, data categories, retention period, and international transfers.
 
-> **Rationale:** Registrul GDPR Art. 30 este obligatoriu legal pentru organizațiile cu peste 250 angajați și recomandat pentru toate. Este fundamentul conformității GDPR și baza pentru evaluările de risc DPIA.
+> **Rationale:** The GDPR Art. 30 record is a legal requirement for organizations with over 250 employees and recommended for all. It is the foundation of GDPR compliance and the basis for DPIA risk assessments.
 
 ---
 
-### DAT-05 — Politică de backup pentru resursele cloud `T1`
+### DAT-05 — Backup policy for cloud resources `T1`
 
 **NIS2:** Art. 21(2)(c) | **GEO 155:** —
 
-Toate resursele cloud critice (baze de date, VM-uri, storage) trebuie incluse în politici de backup automat cu retention definit. Backup-urile trebuie stocate în regiuni geografice diferite și testate semestrial.
+All critical cloud resources (databases, VMs, storage) must be included in automated backup policies with defined retention. Backups must be stored in different geographic regions and tested semi-annually.
 
-> **Rationale:** Resursele cloud nu sunt ferite de pierderea de date — ștergere accidentală, ransomware sau erori de configurare pot cauza pierderi ireversibile fără backup.
+> **Rationale:** Cloud resources are not immune to data loss — accidental deletion, ransomware, or configuration errors can cause irreversible losses without backup.
