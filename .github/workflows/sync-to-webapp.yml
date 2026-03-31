@@ -1,0 +1,37 @@
+name: Sync controls.json to webapp
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'controls.json'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    name: Sync controls.json → cyberbaseline-webapp
+
+    steps:
+      - name: Checkout framework repo
+        uses: actions/checkout@v4
+
+      - name: Checkout webapp repo
+        uses: actions/checkout@v4
+        with:
+          repository: muresanmariusadrian/cyberbaseline-webapp
+          token: ${{ secrets.WEBAPP_DEPLOY_TOKEN }}
+          path: webapp
+
+      - name: Copy controls.json to webapp
+        run: cp controls.json webapp/src/lib/data/controls.json
+
+      - name: Commit and push to webapp
+        run: |
+          cd webapp
+          git config user.name "CyberBaseline Sync"
+          git config user.email "sync@cyberbaseline"
+          git add src/lib/data/controls.json
+          git diff --cached --quiet && echo "No changes to sync" && exit 0
+          git commit -m "chore: sync controls.json from framework repo"
+          git push
