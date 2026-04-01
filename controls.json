@@ -9,6 +9,8 @@
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(1)(a)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Compromiterea conturilor privilegiate fără MFA este vectorul principal de atac în breșele care afectează IMM-urile. MFA blochează peste 99% din atacurile automate de credential stuffing."
   },
@@ -22,6 +24,8 @@
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Parolele slabe sau reutilizate reprezintă vectorul de atac #1 în breșele care afectează IMM-urile. Un manager de parole elimină reutilizarea și simplifică respectarea politicii."
   },
@@ -35,6 +39,8 @@
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(1)(b)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Accesul excesiv amplifică impactul unui cont compromis. Principiul least privilege este una din cele mai eficiente măsuri de limitare a propagării laterale."
   },
@@ -48,6 +54,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Conturile abandonate sunt o poartă de intrare frecventă pentru atacatori. Automatizarea dezactivării elimină dependența de procese manuale eronate."
   },
@@ -61,6 +69,8 @@
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(2)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Acumularea de privilegii în timp (privilege creep) este un risc major în organizații cu fluctuație de personal. Revizuirile periodice mențin principiul least privilege operațional."
   },
@@ -74,6 +84,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Secretele în cod sursă sau variabile de mediu sunt expuse frecvent prin repository-uri publice sau acces neautorizat. Un vault centralizat oferă rotație, audit și acces granular."
   },
@@ -87,6 +99,8 @@
     "nis2_article": "Art. 21(2)(h)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "SPF/DKIM/DMARC previn spoofing-ul de domeniu utilizat în atacuri BEC (Business Email Compromise) și phishing. Configurarea corectă este o măsură cu impact ridicat și cost scăzut."
   },
@@ -100,6 +114,8 @@
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(1)(c)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Peste 90% din incidentele de securitate încep cu un email malițios. Un gateway de email modern blochează amenințările înainte să ajungă la utilizatori."
   },
@@ -113,6 +129,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Atacurile BEC exploatează dificultatea utilizatorilor de a distinge emailurile interne de cele externe. Marcarea vizibilă reduce semnificativ eficiența acestor atacuri."
   },
@@ -126,6 +144,8 @@
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Macro-urile malițioase în documente Office sunt un vector de livrare malware extrem de frecvent. Dezactivarea lor implicit elimină o clasă întreagă de atacuri."
   },
@@ -139,6 +159,8 @@
     "nis2_article": "Art. 21(2)(h)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(1)(d)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Un firewall perimetral corect configurat blochează scanările automate și exploatarea serviciilor expuse inadvertent pe internet."
   },
@@ -152,6 +174,8 @@
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "RDP expus pe internet este vectorul #1 pentru atacuri ransomware. VPN-ul cu MFA elimină această suprafață de atac critică."
   },
@@ -165,6 +189,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "DNS protectiv blochează comunicațiile malware cu serverele de comandă și control (C2) și accesul la domenii phishing, chiar după infecția inițială."
   },
@@ -178,6 +204,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Rețelele WiFi mixte (corporative + oaspeți) permit atacuri de tip ARP spoofing și pivot spre resursele interne. Separarea este o măsură simplă cu impact mare."
   },
@@ -191,6 +219,8 @@
     "nis2_article": "Art. 21(2)(e)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Configurările greșite cloud sunt cauza #1 a breșelor în mediile cloud. CIS Benchmarks oferă un baseline concret și verificabil pentru securizarea conturilor cloud."
   },
@@ -204,6 +234,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Bucket-urile S3 și containerele Blob publice accidental sunt sursa unor dintre cele mai mari breșe de date. Dezactivarea implicită a accesului public previne scurgerile prin configurare greșită."
   },
@@ -217,6 +249,8 @@
     "nis2_article": "Art. 21(2)(e)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 6(1)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Testele de penetrare identifică vulnerabilități reale înainte ca atacatorii să le exploateze. Sunt obligatorii pentru organizațiile NIS2 din sectoare esențiale."
   },
@@ -230,6 +264,8 @@
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(1)(c)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "EDR oferă vizibilitate și capacitate de răspuns la amenințări avansate care depășesc capabilitățile antivirus tradițional. Este componenta de bază a protecției endpoint moderne."
   },
@@ -243,6 +279,8 @@
     "nis2_article": "Art. 21(2)(e)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(1)(e)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Exploatarea vulnerabilităților nepatchuite este cauza a peste 60% din breșele de securitate. Patch management-ul automatizat reduce fereastra de expunere la minimum."
   },
@@ -256,6 +294,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Pierderea sau furtul unui laptop necriptat constituie breșă de date raportabilă ANSPDCP. Criptarea discului protejează datele organizației fără a afecta utilizabilitatea."
   },
@@ -269,6 +309,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Nu poți proteja ceea ce nu știi că există. Inventarul complet este prerequisitul oricărui program de securitate eficient și baza pentru patch management și monitorizare."
   },
@@ -282,6 +324,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Fără clasificare, organizația nu știe ce date trebuie protejate cel mai strict. Clasificarea este fundația pe care se construiesc toate celelalte controale de protecție a datelor."
   },
@@ -295,6 +339,8 @@
     "nis2_article": "Art. 21(2)(c)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(1)(f)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Backup-ul este ultima linie de apărare împotriva ransomware. Copiile imutabile off-site fac recuperarea posibilă chiar dacă toate sistemele locale sunt criptate."
   },
@@ -308,6 +354,8 @@
     "nis2_article": "Art. 21(2)(h)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Datele transmise necriptat pot fi interceptate în orice punct al rețelei. TLS este standardul minim și este obligatoriu pentru orice serviciu web sau API."
   },
@@ -321,6 +369,8 @@
     "nis2_article": null,
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Registrul GDPR Art. 30 este obligatoriu legal pentru organizațiile cu peste 250 angajați și recomandat pentru toate. Este fundamentul conformității GDPR și baza pentru evaluările de risc DPIA."
   },
@@ -334,6 +384,8 @@
     "nis2_article": "Art. 21(2)(c)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Resursele cloud nu sunt ferite de pierderea de date — ștergere accidentală, ransomware sau erori de configurare pot cauza pierderi ireversibile fără backup."
   },
@@ -347,6 +399,8 @@
     "nis2_article": "Art. 21(2)(c)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 7(1)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Organizațiile fără plan de răspuns pierd în medie 3x mai mult timp să conțină un incident. Planul documentat transformă haosul inevitabil al unui incident în acțiuni coordonate."
   },
@@ -360,6 +414,8 @@
     "nis2_article": "Art. 23(4)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 9(1)",
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Termenele de notificare NIS2 sunt obligatorii legal. Nerespectarea lor atrage amenzi semnificative. Procedura pre-documentată asigură că notificarea se face în timp, chiar în condiții de criză."
   },
@@ -373,6 +429,8 @@
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": true,
     "rationale": "Fără logging centralizat, investigarea incidentelor este lentă și incompletă. SIEM reduce timpul mediu de detecție (MTTD) și oferă baza pentru alertare proactivă."
   },
@@ -386,6 +444,8 @@
     "nis2_article": "Art. 21(2)(c)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Viteza de izolare este factorul cel mai critic în limitarea propagării ransomware. Fiecare minut de întârziere permite criptarea mai multor sisteme."
   },
@@ -399,7 +459,84 @@
     "nis2_article": "Art. 21(2)(c)",
     "geo155_mapped": false,
     "geo155_reference": null,
+    "eu_ai_act_mapped": false,
+    "eu_ai_act_article": null,
     "auto_verifiable": false,
     "rationale": "Investigarea criminalistică este necesară pentru înțelegerea completă a unui incident, identificarea vectorului de atac și prevenirea recidivei. Fără ea, aceleași vulnerabilități rămân exploatabile."
+  },
+  {
+    "id": "AIS-01",
+    "domain": "AIS",
+    "title": "Politică de utilizare acceptabilă a AI",
+    "description": "Organizația trebuie să aibă o politică documentată de utilizare a instrumentelor AI, care să specifice: ce instrumente AI sunt permise, ce categorii de date NU pot fi introduse în sisteme AI publice (date confidențiale, date cu caracter personal, secrete de afaceri, cod sursă proprietar), și cerințe de revizuire umană pentru conținutul generat de AI utilizat în decizii de afaceri.",
+    "tier": 1,
+    "nis2_mapped": true,
+    "nis2_article": "Art. 21(2)(a)",
+    "geo155_mapped": false,
+    "geo155_reference": null,
+    "eu_ai_act_mapped": true,
+    "eu_ai_act_article": "Art. 50",
+    "auto_verifiable": false,
+    "rationale": "Angajații care introduc date sensibile în ChatGPT sau alte LLM-uri publice reprezintă cel mai frecvent vector de scurgere de date AI. O politică clară și comunicată reduce semnificativ riscul înainte de implementarea oricăror controale tehnice."
+  },
+  {
+    "id": "AIS-02",
+    "domain": "AIS",
+    "title": "Inventarul instrumentelor AI și prevenirea Shadow AI",
+    "description": "Menținerea unui inventar actualizat al tuturor instrumentelor AI utilizate în organizație (aprobate și neautorizate). Blocarea la nivel de proxy/firewall a instrumentelor AI neautorizate. Revizuire lunară pentru identificarea noilor adoptări necontrolate. Procesul de aprobare pentru instrumente AI noi trebuie să includă evaluarea modului în care furnizorul procesează datele transmise.",
+    "tier": 1,
+    "nis2_mapped": true,
+    "nis2_article": "Art. 21(2)(e)",
+    "geo155_mapped": false,
+    "geo155_reference": null,
+    "eu_ai_act_mapped": true,
+    "eu_ai_act_article": "Art. 26",
+    "auto_verifiable": true,
+    "rationale": "20% dintre organizații au suferit o breșă din cauza Shadow AI în ultimul an. Angajații adoptă instrumente AI fără evaluare de securitate — vizibilitatea este primul pas de control."
+  },
+  {
+    "id": "AIS-03",
+    "domain": "AIS",
+    "title": "Prevenirea exfiltrării datelor prin instrumente AI",
+    "description": "Implementarea de reguli DLP (Data Loss Prevention) care să detecteze și blocheze transmiterea datelor confidențiale sau cu caracter personal către API-uri AI externe. Monitorizarea traficului către endpoint-uri AI cunoscute (api.openai.com, etc.). Cheile API pentru servicii AI trebuie gestionate prin vault (referință IAM-06) și niciodată hard-codate.",
+    "tier": 1,
+    "nis2_mapped": true,
+    "nis2_article": "Art. 21(2)(h)",
+    "geo155_mapped": true,
+    "geo155_reference": "Art. 5(1)",
+    "eu_ai_act_mapped": true,
+    "eu_ai_act_article": "Art. 26",
+    "auto_verifiable": true,
+    "rationale": "Scurgerile de date prin instrumente AI sunt dificil de detectat post-factum — datele transmise unui LLM pot fi folosite pentru antrenament sau accesate de alți utilizatori. Controalele tehnice sunt esențiale alături de politica AIS-01."
+  },
+  {
+    "id": "AIS-04",
+    "domain": "AIS",
+    "title": "Supraveghere umană pentru decizii AI",
+    "description": "Orice decizie de afaceri semnificativă asistată de AI (screening CV-uri, aprobări financiare, comunicări externe, cod în producție) trebuie revizuită și aprobată de o persoană competentă înainte de implementare. Sistemele AI agentice (care acționează autonom) trebuie să aibă restricții explicite privind autonomia și să înregistreze toate acțiunile întreprinse.",
+    "tier": 2,
+    "nis2_mapped": true,
+    "nis2_article": "Art. 21(2)(b)",
+    "geo155_mapped": false,
+    "geo155_reference": null,
+    "eu_ai_act_mapped": true,
+    "eu_ai_act_article": "Art. 26",
+    "auto_verifiable": false,
+    "rationale": "Sistemele AI comit erori factuale, pot fi manipulate prin prompt injection și nu înțeleg contextul organizațional. Supravegherea umană previne decizii eronate cu impact operațional sau reputațional."
+  },
+  {
+    "id": "AIS-05",
+    "domain": "AIS",
+    "title": "Conformitate EU AI Act pentru sisteme AI cu risc ridicat",
+    "description": "Organizațiile care utilizează sau implementează sisteme AI cu risc ridicat (conform Anexei III din EU AI Act: biometrie, infrastructură critică, angajare, educație, servicii esențiale) trebuie să: desemneze o persoană responsabilă cu supravegherea sistemului, mențină documentație tehnică actualizată, înregistreze toate deciziile AI (minimum 6 luni), efectueze o evaluare a impactului asupra drepturilor fundamentale (Art. 27) înainte de implementare și raporteze incidente semnificative la ANPC/DNSC.",
+    "tier": 3,
+    "nis2_mapped": true,
+    "nis2_article": "Art. 21(2)(c)",
+    "geo155_mapped": false,
+    "geo155_reference": null,
+    "eu_ai_act_mapped": true,
+    "eu_ai_act_article": "Art. 26, 27, 29",
+    "auto_verifiable": false,
+    "rationale": "EU AI Act devine aplicabil pentru sisteme cu risc ridicat în august 2026. Neconformitatea atrage amenzi de până la 3% din cifra de afaceri globală (reducere 50% pentru IMM-uri). Implementarea timpurie a documentației și supravegherii evită costurile de remediere în criză."
   }
 ]

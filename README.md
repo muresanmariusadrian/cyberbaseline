@@ -35,24 +35,26 @@ CyberBaseline is built around these real threats, not an exhaustive academic tax
 | [EPT](domains/EPT.md) | Endpoint Protection | 4 |
 | [DAT](domains/DAT.md) | Data Protection | 5 |
 | [INC](domains/INC.md) | Incident Management | 5 |
+| [AIS](domains/AIS.md) | AI Security | 5 |
 
-**Total: 31 controls**
+**Total: 36 controls**
 
 ### Maturity tiers
 
 | Tier | Label | Controls | Description |
 |------|-------|----------|-------------|
-| T1 | **Essential** | 26 | Foundational controls required for minimum NIS2 compliance. Fast to implement, immediate impact. |
-| T2 | **Advanced** | 3 | Recommended for organizations with moderate risk profiles or sensitive data. |
-| T3 | **Resilient** | 2 | Controls for organizations in essential or important sectors under NIS2. |
+| T1 | **Essential** | 29 | Foundational controls required for minimum NIS2 compliance. Fast to implement, immediate impact. |
+| T2 | **Advanced** | 4 | Recommended for organizations with moderate risk profiles or sensitive data. |
+| T3 | **Resilient** | 3 | Controls for organizations in essential or important sectors under NIS2 and EU AI Act. |
 
 ---
 
-## NIS2 and GEO 155/2024 compliance
+## NIS2, GEO 155/2024, and EU AI Act compliance
 
 All controls are mapped to relevant articles in:
 - **NIS2 Directive** (EU 2022/2555)
 - **GEO 155/2024** — NIS2 transposition into Romanian law
+- **EU AI Act** (EU 2024/1689) — AI security controls mapped to deployer obligations (Art. 26, 27, 29, 50)
 
 Organizations in essential sectors (energy, transport, health, finance, water, digital infrastructure) and important sectors (postal, waste management, manufacturing, digital services) have legal compliance obligations.
 
@@ -82,13 +84,14 @@ Once T1 is fully implemented, evaluate T2 controls based on your organization's 
 
 | File | Contents |
 |------|----------|
-| [`controls.json`](controls.json) | All controls in JSON format (source of truth) |
+| [`controls.json`](controls.json) | All controls in JSON format (source of truth, includes EU AI Act mappings) |
 | [`domains/IAM.md`](domains/IAM.md) | Identity & Access Management |
 | [`domains/EML.md`](domains/EML.md) | Email Security |
 | [`domains/NET.md`](domains/NET.md) | Network & Infrastructure |
 | [`domains/EPT.md`](domains/EPT.md) | Endpoint Protection |
 | [`domains/DAT.md`](domains/DAT.md) | Data Protection |
 | [`domains/INC.md`](domains/INC.md) | Incident Management |
+| [`domains/AIS.md`](domains/AIS.md) | AI Security |
 
 ---
 
