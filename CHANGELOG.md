@@ -2,6 +2,26 @@
 
 All notable changes to CyberBaseline are documented here.
 
+## [2.0.0] — 2026-04-20
+
+### Simplified: 36 → 24 controls, full NIS2 coverage maintained
+
+**Design goal:** Reduce complexity without losing regulatory alignment. Every NIS2 article covered in v1.x remains covered in v2.0.
+
+#### Merges by domain
+
+- **IAM** (6 → 4): IAM-04 + IAM-05 merged into "Gestionarea ciclului de viață al accesurilor". IAM-06 (Secrets Vault) removed from core framework — not NIS2-mapped and better addressed as part of IAM-01 operational guidance.
+- **EML** (4 → 3): EML-03 (External marking) + EML-04 (Macro disable) merged into "Întărirea configurației de email" — both are email hardening measures sharing NIS2 Art. 21(2)(b).
+- **NET** (7 → 5): NET-03 (DNS) + NET-04 (Guest WiFi) merged into "Protecție DNS și segmentare rețea WiFi"; NET-05 (Cloud config) + NET-06 (Cloud storage) merged into "Securizarea infrastructurii cloud". NET-07 renumbered NET-05.
+- **EPT** (4 → 3): EPT-03 (Disk encryption) + EPT-04 (Asset inventory) merged into "Inventar și hardening dispozitive".
+- **DAT** (5 → 3): DAT-01 (Classification) + DAT-04 (GDPR register) merged into "Clasificarea datelor și registrul GDPR"; DAT-02 + DAT-05 merged into "Strategie completă de backup" (both mapped to NIS2 Art. 21(2)(c)).
+- **INC** (5 → 3): INC-01 (IR Plan) + INC-02 (NIS2 notification) merged — the notification procedure is a natural part of the IR plan; INC-04 (Isolation) + INC-05 (Forensics) merged into "Containment și investigare criminalistică".
+- **AIS** (5 → 3): AIS-01 (Policy) + AIS-02 (Inventory) merged — policy and inventory are operationally inseparable; AIS-04 (Human oversight) + AIS-05 (EU AI Act) merged into "Guvernanță AI și conformitate EU AI Act".
+
+**Updated totals:** 24 controls · 7 domains · NIS2 coverage: all original articles preserved
+
+---
+
 ## [1.1.0] — 2026-04-01
 
 ### Added: AIS — AI Security domain

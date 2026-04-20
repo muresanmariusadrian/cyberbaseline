@@ -4,7 +4,6 @@
     "domain": "IAM",
     "title": "Autentificare multifactor pentru conturi privilegiate",
     "description": "Toate conturile cu privilegii administrative (administratori de sistem, IT, cloud) trebuie să utilizeze autentificare multifactor (MFA/2FA). Factorul suplimentar poate fi o aplicație TOTP (Google Authenticator, Microsoft Authenticator) sau un token hardware FIDO2.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": true,
@@ -12,14 +11,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Compromiterea conturilor privilegiate fără MFA este vectorul principal de atac în breșele care afectează IMM-urile. MFA blochează peste 99% din atacurile automate de credential stuffing."
+    "rationale": "Compromiterea conturilor privilegiate fără MFA este vectorul principal de atac în breșele care afectează IMM-urile. MFA blochează peste 99% din atacurile automate de credential stuffing.",
+    "level_criteria": {
+      "l1": "MFA activă pentru toate conturile cu acces administrativ sau privilegiat. Cel puțin un factor hardware sau software (TOTP, FIDO2, notificare push) este configurat și funcțional. Conturile administrative fără MFA activ nu au acces la sistemele critice.",
+      "l2": "MFA este extinsă la toate conturile de utilizator, nu doar privilegiate. Metodele MFA vulnerabile la phishing (SMS, voce) sunt dezactivate sau înlocuite cu TOTP sau FIDO2. Excepțiile de la MFA sunt documentate, aprobate și monitorizate periodic.",
+      "l3": "MFA phishing-resistant (FIDO2/passkeys) este obligatorie pentru toți utilizatorii și toate aplicațiile. Tentativele de bypass MFA generează alerte automate investigate în timp real. Dispozitivele autorizate MFA sunt gestionate centralizat cu revocare automată la detectarea anomaliilor."
+    }
   },
   {
     "id": "IAM-02",
     "domain": "IAM",
     "title": "Politică de parole complexe",
     "description": "Toate conturile de utilizator trebuie să folosească parole cu minimum 12 caractere, evitând parolele din liste de breșe cunoscute. Se recomandă implementarea unui manager de parole organizațional (Bitwarden Teams, 1Password Business) în locul rotației forțate periodice.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": false,
@@ -27,14 +30,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Parolele slabe sau reutilizate reprezintă vectorul de atac #1 în breșele care afectează IMM-urile. Un manager de parole elimină reutilizarea și simplifică respectarea politicii."
+    "rationale": "Parolele slabe sau reutilizate reprezintă vectorul de atac #1 în breșele care afectează IMM-urile. Un manager de parole elimină reutilizarea și simplifică respectarea politicii.",
+    "level_criteria": {
+      "l1": "Toate conturile de utilizator au parole cu minimum 12 caractere, verificate împotriva listelor de parole compromise prin politică de sistem. Rotația forțată periodică nu este aplicată; parolele sunt schimbate la indicii de compromitere.",
+      "l2": "Un manager de parole organizațional este implementat și utilizat de toți angajații. Parolele duplicate între sisteme diferite sunt detectate și eliminate. Conturile de serviciu au parole unice, complexe, gestionate automat.",
+      "l3": "Parolele sunt eliminate progresiv în favoarea autentificării fără parolă (passkeys, certificate) pentru sistemele care o suportă. Monitorizarea activă detectează parolele compromise în timp real prin integrare cu feed-uri de breșe cunoscute."
+    }
   },
   {
     "id": "IAM-03",
     "domain": "IAM",
     "title": "Principiul privilegiului minim",
     "description": "Utilizatorii trebuie să aibă doar permisiunile necesare pentru sarcinile de serviciu. Conturile administrative separate de cele de zi cu zi, revizuire trimestrială a accesurilor, revocare imediată la schimbarea rolului sau plecarea din organizație.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": true,
@@ -42,59 +49,37 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": false,
-    "rationale": "Accesul excesiv amplifică impactul unui cont compromis. Principiul least privilege este una din cele mai eficiente măsuri de limitare a propagării laterale."
+    "rationale": "Accesul excesiv amplifică impactul unui cont compromis. Principiul least privilege este una din cele mai eficiente măsuri de limitare a propagării laterale.",
+    "level_criteria": {
+      "l1": "Fiecare utilizator are acces strict la resursele necesare rolului său, documentat și aprobat. Conturile administrative sunt separate de conturile de zi cu zi. Drepturile de acces sunt revizuite cel puțin trimestrial pentru conturi privilegiate și revocate în ziua schimbării rolului sau plecării.",
+      "l2": "Accesul just-in-time (JIT) este implementat pentru privilegii administrative — conturile solicită privilegii când necesar, cu aprobare și TTL definit. Privilegiile acordate și revocate sunt logged complet.",
+      "l3": "Modelul zero-standing-privileges este implementat: niciun cont nu deține privilegii administrative permanente. Sesiunile privilegiate sunt înregistrate integral (session recording). Analiza automată detectează anomalii de utilizare și generează alerte."
+    }
   },
   {
     "id": "IAM-04",
     "domain": "IAM",
-    "title": "Dezactivarea conturilor inactive",
-    "description": "Conturile de utilizator inactive mai mult de 30 de zile trebuie dezactivate automat. Conturile foștilor angajați trebuie revocate în ziua plecării. Procesul trebuie integrat cu procedura de offboarding HR.",
-    "tier": 1,
-    "nis2_mapped": false,
-    "nis2_article": null,
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": true,
-    "rationale": "Conturile abandonate sunt o poartă de intrare frecventă pentru atacatori. Automatizarea dezactivării elimină dependența de procese manuale eronate."
-  },
-  {
-    "id": "IAM-05",
-    "domain": "IAM",
-    "title": "Revizuirea periodică a drepturilor de acces",
-    "description": "Revizuire formală trimestrială a tuturor accesurilor privilegiate și semestrială pentru accesurile standard. Procesul trebuie documentat și aprobat de manageri de linie, nu de IT.",
-    "tier": 2,
+    "title": "Gestionarea ciclului de viață al accesurilor",
+    "description": "Conturile inactive mai mult de 30 de zile trebuie dezactivate automat, iar conturile foștilor angajați revocate în ziua plecării, integrat cu procedura de offboarding HR. Revizuire formală trimestrială a accesurilor privilegiate și semestrială pentru accesurile standard, documentată și aprobată de manageri de linie.",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": true,
     "geo155_reference": "Art. 5(2)",
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
-    "auto_verifiable": false,
-    "rationale": "Acumularea de privilegii în timp (privilege creep) este un risc major în organizații cu fluctuație de personal. Revizuirile periodice mențin principiul least privilege operațional."
-  },
-  {
-    "id": "IAM-06",
-    "domain": "IAM",
-    "title": "Gestionarea secretelor și credențialelor cu vault",
-    "description": "Credențialele, cheile API, șirurile de conexiune la baze de date și alte secrete nu trebuie hard-codate în cod sau stocate în variabile de mediu text clar. Trebuie utilizat un serviciu de vault (Azure Key Vault, AWS Secrets Manager, HashiCorp Vault).",
-    "tier": 1,
-    "nis2_mapped": false,
-    "nis2_article": null,
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Secretele în cod sursă sau variabile de mediu sunt expuse frecvent prin repository-uri publice sau acces neautorizat. Un vault centralizat oferă rotație, audit și acces granular."
+    "rationale": "Conturile abandonate și acumularea de privilegii în timp (privilege creep) sunt riscuri majore în organizații cu fluctuație de personal. Dezactivarea automată combinată cu revizuirile periodice mențin principiul least privilege operațional pe întregul ciclu de viață al angajatului.",
+    "level_criteria": {
+      "l1": "Conturile inactive mai mult de 30 de zile sunt dezactivate automat prin politică de sistem. Conturile foștilor angajați sunt revocate în ziua plecării, verificat printr-un proces de offboarding HR documentat. O revizuire formală a accesurilor privilegiate este realizată cel puțin trimestrial, documentată și aprobată de managerii de linie, cu acces nejustificat revocat în 5 zile lucrătoare.",
+      "l2": "Dezactivarea conturilor inactive este raportată lunar managementului. Procesul de offboarding include o checklist automată cu verificarea tuturor accesurilor (SaaS, cloud, VPN). Revizuirea semestrială a accesurilor standard este realizată incluzând aplicații SaaS, cu campanie de re-certificare automatizată și evidență de audit completă.",
+      "l3": "Revocarea accesurilor la plecare este automatizată end-to-end prin integrare directă HRIS–IAM, cu timp de revocare sub 1 oră. Orice cont care redevine activ neautorizat generează alertă imediată. Access reviews sunt automatizate continuu cu analiză a tiparelor de utilizare și recomandări automate de revocare prezentate managerilor."
+    }
   },
   {
     "id": "EML-01",
     "domain": "EML",
     "title": "Configurare SPF, DKIM și DMARC",
     "description": "Domeniul de email al organizației trebuie să aibă configurate înregistrările DNS SPF, DKIM și DMARC cu politică minimă 'quarantine'. Politica DMARC trebuie monitorizată prin rapoarte agregate (RUA) pentru a detecta utilizarea neautorizată a domeniului.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(h)",
     "geo155_mapped": false,
@@ -102,14 +87,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "SPF/DKIM/DMARC previn spoofing-ul de domeniu utilizat în atacuri BEC (Business Email Compromise) și phishing. Configurarea corectă este o măsură cu impact ridicat și cost scăzut."
+    "rationale": "SPF/DKIM/DMARC previn spoofing-ul de domeniu utilizat în atacuri BEC (Business Email Compromise) și phishing. Configurarea corectă este o măsură cu impact ridicat și cost scăzut.",
+    "level_criteria": {
+      "l1": "Domeniul de email are înregistrările SPF, DKIM și DMARC configurate corect în DNS, cu politică DMARC minimum 'quarantine'. Rapoartele agregate DMARC (RUA) sunt configurate și revizuite cel puțin lunar pentru a detecta utilizarea neautorizată.",
+      "l2": "Politica DMARC este setată la 'reject' pentru toate domeniile organizației, inclusiv subdomeniile. Rapoartele DMARC sunt analizate automat cu alertare la detectarea utilizării neautorizate a domeniului. Cheile DKIM sunt rotite cel puțin anual.",
+      "l3": "Toate subdomeniile și domeniile de branding sunt acoperite de politici DMARC 'reject'. Monitoringul DMARC este automatizat cu integrare în SIEM. BIMI (Brand Indicators for Message Identification) este implementat pentru autenticitate vizuală."
+    }
   },
   {
     "id": "EML-02",
     "domain": "EML",
     "title": "Filtrare anti-phishing și anti-malware",
     "description": "Implementarea unui gateway de email cu capacități avansate de filtrare anti-phishing, detecție URL malițioase și sandbox pentru atașamente (Microsoft Defender for Office 365, Proofpoint, Mimecast). Filtrarea trebuie activată pentru toți utilizatorii.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": true,
@@ -117,29 +106,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Peste 90% din incidentele de securitate încep cu un email malițios. Un gateway de email modern blochează amenințările înainte să ajungă la utilizatori."
+    "rationale": "Peste 90% din incidentele de securitate încep cu un email malițios. Un gateway de email modern blochează amenințările înainte să ajungă la utilizatori.",
+    "level_criteria": {
+      "l1": "Un gateway de email cu filtrare anti-phishing, detecție URL malițioase și sandbox pentru atașamente este activ pentru toți utilizatorii. Filtrarea nu poate fi dezactivată individual. Alertele gateway sunt revizuite cel puțin săptămânal.",
+      "l2": "Filtrarea gateway include analiză comportamentală și detecție de impersonare a executivilor (BEC). URL-urile din emailuri sunt rescrise și re-analizate la click (time-of-click rewriting). Blocarea automată a domeniilor nou-înregistrate (NRD) este activă.",
+      "l3": "Protecția email include analiză ML a conținutului și comportamentului expeditorului, detecție de tehnici avansate de evaziune și integrare cu threat intelligence feeds. Incidentele email sunt investigate automat cu containment în sub 5 minute."
+    }
   },
   {
     "id": "EML-03",
     "domain": "EML",
-    "title": "Marcarea emailurilor externe",
-    "description": "Toate emailurile provenite din afara organizației trebuie marcate vizibil cu un banner sau prefix de subiect (ex: '[EXTERN]') pentru a alerta utilizatorii la tentative de impersonare a colegilor sau conducerii.",
-    "tier": 1,
-    "nis2_mapped": false,
-    "nis2_article": null,
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": true,
-    "rationale": "Atacurile BEC exploatează dificultatea utilizatorilor de a distinge emailurile interne de cele externe. Marcarea vizibilă reduce semnificativ eficiența acestor atacuri."
-  },
-  {
-    "id": "EML-04",
-    "domain": "EML",
-    "title": "Dezactivarea macro-urilor Office în emailuri",
-    "description": "Macro-urile din documentele Office primite prin email trebuie dezactivate implicit prin Group Policy sau Intune. Excepțiile necesită aprobare IT și trebuie limitate la surse de încredere verificate.",
-    "tier": 1,
+    "title": "Întărirea configurației de email",
+    "description": "Toate emailurile provenite din afara organizației trebuie marcate vizibil cu un banner sau prefix de subiect (ex: '[EXTERN]') pentru a alerta utilizatorii la tentative de impersonare. Macro-urile din documentele Office primite prin email trebuie dezactivate implicit prin Group Policy sau Intune, cu excepții limitate la surse de încredere verificate.",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": false,
@@ -147,14 +125,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Macro-urile malițioase în documente Office sunt un vector de livrare malware extrem de frecvent. Dezactivarea lor implicit elimină o clasă întreagă de atacuri."
+    "rationale": "Atacurile BEC exploatează dificultatea utilizatorilor de a distinge emailurile interne de cele externe, iar macro-urile malițioase din documentele Office sunt un vector de livrare malware extrem de frecvent. Marcarea vizibilă și dezactivarea macro-urilor elimină două clase de atacuri simultan cu configurare centralizată.",
+    "level_criteria": {
+      "l1": "Toate emailurile din afara domeniului organizației sunt marcate vizibil cu un banner sau prefix de subiect la nivel de server, obligatoriu pentru toți utilizatorii. Execuția macro-urilor în documentele Office primite prin email este dezactivată implicit prin politică centralizată (Group Policy sau Intune), cu excepții aprobate IT și documentate.",
+      "l2": "Marcarea diferențiază contextul expeditorului: emailuri de la domenii noi sunt marcate distinct față de corespondenții cunoscuți, iar emailurile care impersonează domenii interne (typosquatting) sunt detectate și blocate. Blocarea macro-urilor se extinde la toate documentele Office indiferent de sursă, iar macro-urile aprobate sunt semnate digital cu un certificat organizațional.",
+      "l3": "Sistemul corelează automat contextul expeditorului cu istoricul de comunicare; emailuri de la domenii necunoscute cu cereri financiare sunt semnalizate automat. Politica de control al aplicațiilor (AppLocker/WDAC) blochează macro-urile la nivel de kernel, prevenind și tentativele de bypass."
+    }
   },
   {
     "id": "NET-01",
     "domain": "NET",
     "title": "Firewall perimetral cu reguli implicite de blocare",
     "description": "Firewall-ul perimetral trebuie configurat cu politică default-deny pentru traficul inbound. Doar porturile și serviciile explicit necesare trebuie deschise. Regulile trebuie documentate și revizuite semestrial.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(h)",
     "geo155_mapped": true,
@@ -162,14 +144,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Un firewall perimetral corect configurat blochează scanările automate și exploatarea serviciilor expuse inadvertent pe internet."
+    "rationale": "Un firewall perimetral corect configurat blochează scanările automate și exploatarea serviciilor expuse inadvertent pe internet.",
+    "level_criteria": {
+      "l1": "Firewall-ul perimetral este configurat cu politică implicit-deny pentru traficul inbound. Fiecare regulă de acces este documentată cu justificare de business. Regulile sunt revizuite și validate cel puțin semestrial, iar toate modificările sunt loggate cu data și autorul.",
+      "l2": "Modificările la regulile de firewall urmează un proces de change management cu aprobare. Starea regulilor este auditată automat față de baseline-ul aprobat, cu alertare la deviații. Regulile expirate sau nefolosite sunt identificate și eliminate trimestrial.",
+      "l3": "Firewall-ul este integrat cu threat intelligence feeds pentru blocarea automată a IP-urilor malițioase cunoscute. Analiza comportamentală a traficului detectează anomalii. Segmentarea micro-perimetrală reduce suprafața de atac lateral în interiorul rețelei."
+    }
   },
   {
     "id": "NET-02",
     "domain": "NET",
     "title": "VPN pentru acces remote",
     "description": "Accesul remote la resursele organizației trebuie realizat exclusiv prin VPN cu autentificare MFA. RDP, SMB și alte protocoale de management nu trebuie expuse direct pe internet. Se recomandă arhitecturi Zero Trust Network Access (ZTNA) ca alternativă modernă.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(i)",
     "geo155_mapped": false,
@@ -177,14 +163,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "RDP expus pe internet este vectorul #1 pentru atacuri ransomware. VPN-ul cu MFA elimină această suprafață de atac critică."
+    "rationale": "RDP expus pe internet este vectorul #1 pentru atacuri ransomware. VPN-ul cu MFA elimină această suprafață de atac critică.",
+    "level_criteria": {
+      "l1": "Accesul remote la rețeaua și resursele organizației se realizează exclusiv prin VPN cu MFA. Protocoalele de management (RDP, SMB, SSH) nu sunt accesibile direct din internet, verificat prin scanare externă. Sesiunile VPN sunt loggate.",
+      "l2": "Dispozitivele se conectează la VPN doar dacă trec verificări de conformitate (compliance check: patch level, EDR activ, disk encryption). Sesiunile VPN inactive sunt terminate automat după timeout. Split tunneling este restricționat sau dezactivat.",
+      "l3": "Arhitectura Zero Trust Network Access (ZTNA) înlocuiește sau completează VPN-ul tradițional: accesul este acordat per-aplicație cu verificare continuă a posturii dispozitivului și identității utilizatorului. Sesiunile anomale sunt terminate automat."
+    }
   },
   {
     "id": "NET-03",
     "domain": "NET",
-    "title": "Filtrare DNS protectivă",
-    "description": "Implementarea unui resolver DNS cu filtrare a domeniilor malițioase (Cloudflare Gateway, Cisco Umbrella, CERT-RO DNS). Toate dispozitivele organizației trebuie să folosească exclusiv DNS-ul organizației. Modificarea DNS de către utilizatori trebuie blocată.",
-    "tier": 1,
+    "title": "Protecție DNS și segmentare rețea WiFi",
+    "description": "Implementarea unui resolver DNS cu filtrare a domeniilor malițioase (Cloudflare Gateway, Cisco Umbrella, CERT-RO DNS) pentru toate dispozitivele organizației. Oaspeții și dispozitivele personale trebuie conectați la o rețea WiFi separată, izolată complet de rețeaua corporativă printr-un VLAN dedicat.",
     "nis2_mapped": false,
     "nis2_article": null,
     "geo155_mapped": false,
@@ -192,29 +182,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "DNS protectiv blochează comunicațiile malware cu serverele de comandă și control (C2) și accesul la domenii phishing, chiar după infecția inițială."
+    "rationale": "DNS protectiv blochează comunicațiile malware cu serverele C2 și accesul la domenii phishing chiar după infecția inițială. Rețelele WiFi mixte permit atacuri de pivot spre resursele interne — separarea este o măsură simplă cu impact mare.",
+    "level_criteria": {
+      "l1": "Toate dispozitivele din organizație utilizează exclusiv resolvere DNS cu filtrare de domenii malițioase, cu modificarea manuală blocată prin politică. Rețeaua WiFi pentru oaspeți și dispozitive personale este separată (VLAN dedicat) de rețeaua corporativă și nu are acces la nicio resursă internă. Izolarea WiFi este verificată cel puțin anual.",
+      "l2": "Filtrarea DNS include categorii actualizate în timp real cu threat intelligence, iar alertele DNS pentru domenii malițioase sunt integrate în SIEM. Rețeaua de oaspeți include rate limiting, captive portal și client isolation. Monitorizarea detectează utilizarea neconformă a ambelor segmente.",
+      "l3": "Analiza DNS include detecția tunneling-ului utilizat pentru exfiltrare sau comunicații C2. Toate rețelele wireless (corporative, oaspeți, IoT) sunt segmentate în VLAN-uri distincte cu 802.1X și certificate pentru autentificare corporativă. Detectarea access point-urilor rogue este automată și continuă."
+    }
   },
   {
     "id": "NET-04",
     "domain": "NET",
-    "title": "Rețea WiFi separată pentru oaspeți",
-    "description": "Oaspeții și dispozitivele personale ale angajaților trebuie conectați la o rețea WiFi separată, izolată complet de rețeaua corporativă. Rețeaua de oaspeți trebuie să ofere acces doar la internet, fără acces la resurse interne.",
-    "tier": 1,
-    "nis2_mapped": false,
-    "nis2_article": null,
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": true,
-    "rationale": "Rețelele WiFi mixte (corporative + oaspeți) permit atacuri de tip ARP spoofing și pivot spre resursele interne. Separarea este o măsură simplă cu impact mare."
-  },
-  {
-    "id": "NET-05",
-    "domain": "NET",
-    "title": "Configurare securizată a conturilor cloud",
-    "description": "Conturile cloud (Azure, AWS, GCP) trebuie configurate conform CIS Benchmarks pentru furnizorul respectiv. Activarea centrului de securitate cloud (Microsoft Defender for Cloud, AWS Security Hub) pentru detectarea configurărilor greșite.",
-    "tier": 1,
+    "title": "Securizarea infrastructurii cloud",
+    "description": "Conturile cloud (Azure, AWS, GCP) trebuie configurate conform CIS Benchmarks pentru furnizorul respectiv, cu centrul de securitate cloud activat (Microsoft Defender for Cloud, AWS Security Hub). Containerele de storage cloud nu trebuie să fie accesibile public implicit — accesul public trebuie dezactivat la nivel de cont și monitorizat continuu.",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(e)",
     "geo155_mapped": false,
@@ -222,29 +201,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Configurările greșite cloud sunt cauza #1 a breșelor în mediile cloud. CIS Benchmarks oferă un baseline concret și verificabil pentru securizarea conturilor cloud."
+    "rationale": "Configurările greșite cloud sunt cauza #1 a breșelor în mediile cloud, iar bucket-urile de storage publice accidental sunt sursa unora dintre cele mai mari scurgeri de date. CIS Benchmarks combinate cu dezactivarea accesului public oferă un baseline concret și verificabil.",
+    "level_criteria": {
+      "l1": "Conturile cloud sunt configurate conform CIS Benchmarks nivel 1. Centrul de securitate cloud este activat, iar alertele de configurare greșită cu severitate înaltă sunt rezolvate în 7 zile. Accesul public la containerele de storage este dezactivat la nivel de cont prin politică (SCP sau Azure Policy), cu monitorizare continuă și alertare la reactivare accidentală în 4 ore.",
+      "l2": "Politicile de conformitate cloud sunt aplicate automat prin Infrastructure as Code. Security posture score este monitorizat și raportat lunar. Toate containerele de storage sunt inventariate cu clasificare de accesibilitate revizuită trimestrial, iar datele sensibile sunt identificate automat și criptate.",
+      "l3": "Cloud Security Posture Management (CSPM) cu remediere automată este implementat. Data Security Posture Management (DSPM) monitorizează continuu expunerea datelor în storage. Toate modificările de infrastructură trec prin pipeline CI/CD cu security scanning, iar drift-ul față de baseline este corectat în timp real."
+    }
   },
   {
-    "id": "NET-06",
-    "domain": "NET",
-    "title": "Dezactivarea accesului public la storage cloud",
-    "description": "Containerele de storage cloud (Azure Blob, AWS S3, Google Cloud Storage) nu trebuie să fie accesibile public implicit. Accesul public trebuie dezactivat la nivel de cont și monitorizat continuu pentru reactivare accidentală.",
-    "tier": 1,
-    "nis2_mapped": false,
-    "nis2_article": null,
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": true,
-    "rationale": "Bucket-urile S3 și containerele Blob publice accidental sunt sursa unor dintre cele mai mari breșe de date. Dezactivarea implicită a accesului public previne scurgerile prin configurare greșită."
-  },
-  {
-    "id": "NET-07",
+    "id": "NET-05",
     "domain": "NET",
     "title": "Testare de penetrare periodică",
     "description": "Efectuarea unui test de penetrare extern anual și intern bianual, realizat de un furnizor terț autorizat. Vulnerabilitățile critice identificate trebuie remediate în 30 de zile, cele înalte în 90 de zile.",
-    "tier": 3,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(e)",
     "geo155_mapped": true,
@@ -252,14 +220,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": false,
-    "rationale": "Testele de penetrare identifică vulnerabilități reale înainte ca atacatorii să le exploateze. Sunt obligatorii pentru organizațiile NIS2 din sectoare esențiale."
+    "rationale": "Testele de penetrare identifică vulnerabilități reale înainte ca atacatorii să le exploateze. Sunt obligatorii pentru organizațiile NIS2 din sectoare esențiale.",
+    "level_criteria": {
+      "l1": "Un test de penetrare extern este realizat anual de un furnizor autorizat (CREST, OSCP sau echivalent). Vulnerabilitățile critice identificate sunt remediate în 30 de zile, cele înalte în 90 de zile, cu dovezi documentate de remediere.",
+      "l2": "Testele de penetrare includ componenta internă (lateral movement, privilege escalation). Rezultatele sunt urmărite într-un sistem de tracking până la remediere completă. Retestarea confirmă remedierea pentru vulnerabilitățile critice și înalte.",
+      "l3": "Programul de testare include red team exercises care simulează atacuri APT. Un program de bug bounty completează pentest-urile periodice. Rezultatele sunt integrate în roadmap-ul de securitate cu prioritizare bazată pe risc."
+    }
   },
   {
     "id": "EPT-01",
     "domain": "EPT",
     "title": "Soluție EDR pe toate dispozitivele",
     "description": "Toate dispozitivele gestionate (laptopuri, desktop-uri, servere) trebuie să ruleze o soluție de tip Endpoint Detection & Response (EDR). Acoperirea trebuie monitorizată și menținută la 100%. Alertele critice trebuie investigate în 24 de ore.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": true,
@@ -267,14 +239,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "EDR oferă vizibilitate și capacitate de răspuns la amenințări avansate care depășesc capabilitățile antivirus tradițional. Este componenta de bază a protecției endpoint moderne."
+    "rationale": "EDR oferă vizibilitate și capacitate de răspuns la amenințări avansate care depășesc capabilitățile antivirus tradițional. Este componenta de bază a protecției endpoint moderne.",
+    "level_criteria": {
+      "l1": "O soluție EDR este instalată și activă pe 100% din dispozitivele gestionate (laptopuri, desktop-uri, servere). Dispozitivele fără agent EDR sunt identificate și remediate în 24 de ore. Alertele critice sunt investigate în maximum 24 de ore de la generare.",
+      "l2": "EDR-ul este configurat în modul activ de blocare (prevention mode), nu doar detecție. Politicile EDR sunt revizuite trimestrial și actualizate cu noile tehnici de atac. Acoperirea include dispozitivele temporare sau BYOD autorizate.",
+      "l3": "EDR-ul este integrat cu SIEM/SOAR pentru investigare și răspuns automat la incidente. Threat hunting proactiv este realizat lunar folosind telemetria EDR. Acoperirea 100% include servere cloud, containere și medii virtuale."
+    }
   },
   {
     "id": "EPT-02",
     "domain": "EPT",
     "title": "Patch management automatizat",
     "description": "Actualizările de securitate critice trebuie aplicate în maximum 72 de ore de la disponibilitate pe toate sistemele. Patch-urile importante trebuie aplicate în 7 zile. Sistemele neactualizate trebuie izolate sau remediate urgent.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(e)",
     "geo155_mapped": true,
@@ -282,14 +258,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Exploatarea vulnerabilităților nepatchuite este cauza a peste 60% din breșele de securitate. Patch management-ul automatizat reduce fereastra de expunere la minimum."
+    "rationale": "Exploatarea vulnerabilităților nepatchuite este cauza a peste 60% din breșele de securitate. Patch management-ul automatizat reduce fereastra de expunere la minimum.",
+    "level_criteria": {
+      "l1": "Actualizările de securitate critice (CVSS 9.0+) sunt aplicate pe toate sistemele în maximum 72 de ore de la disponibilitate. Patch-urile cu severitate înaltă sunt aplicate în 7 zile. Sistemele care nu pot fi actualizate sunt izolate sau compensate cu controale documentate.",
+      "l2": "Patch management-ul este automatizat și acoperă sisteme de operare, aplicații terțe și firmware. Excepțiile sunt documentate, aprobate și compensate. Raportul lunar de conformitate patch este raportat managementului cu SLA tracking.",
+      "l3": "Vulnerability management este bazat pe risc contextual (CVSS + exploitability + asset criticality), nu doar pe scor CVSS. Remedierile sunt prioritizate automat. Scanarea continuă detectează sisteme nou-adăugate în inventar în 24 de ore."
+    }
   },
   {
     "id": "EPT-03",
     "domain": "EPT",
-    "title": "Criptarea completă a discurilor pe laptopuri",
-    "description": "Toate laptopurile și dispozitivele portabile trebuie să aibă criptarea completă a discului activată (BitLocker pe Windows, FileVault pe macOS). Cheile de recuperare trebuie stocate centralizat în Azure AD sau un vault securizat.",
-    "tier": 1,
+    "title": "Inventar și hardening dispozitive",
+    "description": "Menținerea unui inventar actualizat al tuturor dispozitivelor hardware și aplicațiilor software, descoperit automat prin scanare de rețea sau agent de management. Toate laptopurile și dispozitivele portabile trebuie să aibă criptarea completă a discului activată (BitLocker pe Windows, FileVault pe macOS), cu chei de recuperare stocate centralizat.",
     "nis2_mapped": false,
     "nis2_article": null,
     "geo155_mapped": false,
@@ -297,29 +277,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Pierderea sau furtul unui laptop necriptat constituie breșă de date raportabilă ANSPDCP. Criptarea discului protejează datele organizației fără a afecta utilizabilitatea."
-  },
-  {
-    "id": "EPT-04",
-    "domain": "EPT",
-    "title": "Inventarul hardware și software",
-    "description": "Menținerea unui inventar actualizat al tuturor dispozitivelor hardware și aplicațiilor software din organizație. Descoperire automată prin scanare de rețea. Revizuire lunară pentru identificarea activelor neautorizate.",
-    "tier": 1,
-    "nis2_mapped": false,
-    "nis2_article": null,
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": true,
-    "rationale": "Nu poți proteja ceea ce nu știi că există. Inventarul complet este prerequisitul oricărui program de securitate eficient și baza pentru patch management și monitorizare."
+    "rationale": "Nu poți proteja ceea ce nu știi că există. Inventarul complet este prerequisitul oricărui program de securitate eficient. Pierderea unui laptop necriptat constituie breșă de date raportabilă ANSPDCP — criptarea discului protejează datele fără a afecta utilizabilitatea.",
+    "level_criteria": {
+      "l1": "Un inventar complet și actualizat al tuturor dispozitivelor hardware și aplicațiilor software este menținut, actualizat automat. Activele neautorizate identificate sunt investigate în 5 zile lucrătoare. Criptarea completă a discului este activată pe toate laptopurile și dispozitivele portabile (BitLocker sau FileVault), cu chei de recuperare stocate centralizat în Azure AD/Intune sau un vault securizat.",
+      "l2": "Inventarul include informații de proprietar, locație, criticitate și stare patch/conformitate. Activele sunt clasificate pe criticitate (critic, important, standard) și integrat cu EDR. Criptarea este aplicată prin politică MDM și nu poate fi dezactivată de utilizatori; starea este monitorizată continuu.",
+      "l3": "Asset management este automatizat și integrat cu CMDB. Orice dispozitiv sau aplicație neautorizată generează alertă imediată. Criptarea se extinde la suporturile amovibile (USB, HDD externe) prin politică de control dispozitive, cu remote wipe configurat și testat pentru toate dispozitivele."
+    }
   },
   {
     "id": "DAT-01",
     "domain": "DAT",
-    "title": "Clasificarea datelor organizației",
-    "description": "Toate datele gestionate de organizație trebuie clasificate în categorii (Public, Intern, Confidențial, Secret) cu politici clare de gestionare pentru fiecare categorie. Clasificarea trebuie documentată și comunicată angajaților.",
-    "tier": 1,
+    "title": "Clasificarea datelor și registrul GDPR",
+    "description": "Toate datele gestionate de organizație trebuie clasificate în categorii (Public, Intern, Confidențial) cu politici clare de gestionare. Organizația trebuie să mențină un registru actualizat al activităților de prelucrare a datelor cu caracter personal conform GDPR Art. 30, incluzând scopul, categoriile de date, termenul de retenție și transferurile internaționale.",
     "nis2_mapped": false,
     "nis2_article": null,
     "geo155_mapped": false,
@@ -327,14 +296,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": false,
-    "rationale": "Fără clasificare, organizația nu știe ce date trebuie protejate cel mai strict. Clasificarea este fundația pe care se construiesc toate celelalte controale de protecție a datelor."
+    "rationale": "Fără clasificare, organizația nu știe ce date trebuie protejate cel mai strict — este fundația tuturor celorlalte controale de protecție a datelor. Registrul GDPR Art. 30 este obligatoriu legal și baza pentru evaluările de risc DPIA, ambele documente guvernând același set de date.",
+    "level_criteria": {
+      "l1": "Organizația are o schemă de clasificare documentată (minimum: Public, Intern, Confidențial) cu politici de gestionare comunicate tuturor angajaților; datele cu caracter personal sunt tratate explicit ca Confidențial. Registrul GDPR Art. 30 este menținut actualizat, incluzând scopul, categoriile de date, termenul de retenție și transferurile internaționale, revizuit cel puțin anual.",
+      "l2": "Datele sunt etichetate consistent conform schemei de clasificare în toate sistemele principale. Un instrument de descoperire a datelor sensibile identifică date neclasificate sau greșit clasificate. Registrul include evaluarea riscului per activitate de prelucrare, temeiul legal și DPIA pentru prelucrările cu risc ridicat.",
+      "l3": "Clasificarea datelor este automatizată prin ML pentru documentele noi, cu etichete persistente și politici de acces aplicate automat. Gestionarea cererilor GDPR (acces, ștergere, portabilitate) este automatizată cu SLA de răspuns sub 5 zile. Privacy by design este integrat în procesul de dezvoltare a produselor noi."
+    }
   },
   {
     "id": "DAT-02",
     "domain": "DAT",
-    "title": "Backup 3-2-1 pentru date critice",
-    "description": "Datele critice trebuie să urmeze regula 3-2-1: minim 3 copii, pe 2 medii diferite, cu 1 copie off-site sau în cloud. Backup-urile trebuie testate prin restaurare completă cel puțin trimestrial și protejate împotriva ransomware prin copii imutabile.",
-    "tier": 1,
+    "title": "Strategie completă de backup",
+    "description": "Datele critice trebuie să urmeze regula 3-2-1: minim 3 copii, pe 2 medii diferite, cu 1 copie off-site sau în cloud, protejate împotriva ransomware prin copii imutabile. Toate resursele cloud critice (baze de date, VM-uri, storage) trebuie incluse în politici de backup automat cu retenție definită și stocate în regiuni geografice diferite.",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(c)",
     "geo155_mapped": true,
@@ -342,14 +315,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": false,
-    "rationale": "Backup-ul este ultima linie de apărare împotriva ransomware. Copiile imutabile off-site fac recuperarea posibilă chiar dacă toate sistemele locale sunt criptate."
+    "rationale": "Backup-ul este ultima linie de apărare împotriva ransomware. O strategie unificată pentru date on-premise și cloud elimină lacunele de acoperire care fac recuperarea imposibilă după un atac.",
+    "level_criteria": {
+      "l1": "Datele critice urmează regula 3-2-1 cu cel puțin o copie off-site sau în cloud, protejate prin imutabilitate. Toate resursele cloud critice sunt incluse în politici de backup automat cu retenție minimum 30 de zile și stocate în regiuni geografice diferite. Restaurarea completă este testată cel puțin trimestrial și documentată.",
+      "l2": "Backup-urile sunt criptate în repaus și în tranzit, cu acces restricționat și auditat separat față de producție. RTO și RPO sunt definite, documentate și verificate prin testare. Politicile de backup cloud sunt gestionate ca Infrastructure as Code, aplicate automat la provisioning, cu conformitate monitorizată continuu.",
+      "l3": "Backup-urile critice respectă regula 3-2-1-1: o copie adițională off-line (air-gapped) inaccesibilă din rețea. Testele de restaurare sunt automatizate și frecvente. Strategia include copii cross-cloud pentru reziliență maximă, iar Planul de Disaster Recovery (DR) este testat anual cu exerciții complete de failover."
+    }
   },
   {
     "id": "DAT-03",
     "domain": "DAT",
     "title": "Criptarea datelor în tranzit (TLS)",
     "description": "Tot traficul de rețea care conține date sensibile trebuie criptat cu TLS 1.2 sau 1.3. Certificatele SSL trebuie gestionate și reînnoite automat (Let's Encrypt, Azure Certificate Manager). HTTP plain trebuie redirecționat la HTTPS.",
-    "tier": 1,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(h)",
     "geo155_mapped": false,
@@ -357,74 +334,37 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Datele transmise necriptat pot fi interceptate în orice punct al rețelei. TLS este standardul minim și este obligatoriu pentru orice serviciu web sau API."
-  },
-  {
-    "id": "DAT-04",
-    "domain": "DAT",
-    "title": "Registrul activităților de prelucrare (GDPR Art. 30)",
-    "description": "Organizația trebuie să mențină un registru actualizat al activităților de prelucrare a datelor cu caracter personal, conform GDPR Art. 30. Registrul trebuie să includă scopul, categoriile de date, termenul de retenție și transferurile internaționale.",
-    "tier": 1,
-    "nis2_mapped": false,
-    "nis2_article": null,
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": false,
-    "rationale": "Registrul GDPR Art. 30 este obligatoriu legal pentru organizațiile cu peste 250 angajați și recomandat pentru toate. Este fundamentul conformității GDPR și baza pentru evaluările de risc DPIA."
-  },
-  {
-    "id": "DAT-05",
-    "domain": "DAT",
-    "title": "Politică de backup pentru resursele cloud",
-    "description": "Toate resursele cloud critice (baze de date, VM-uri, storage) trebuie incluse în politici de backup automat cu retention definit. Backup-urile trebuie stocate în regiuni geografice diferite și testate semestrial.",
-    "tier": 1,
-    "nis2_mapped": true,
-    "nis2_article": "Art. 21(2)(c)",
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": true,
-    "rationale": "Resursele cloud nu sunt ferite de pierderea de date — ștergere accidentală, ransomware sau erori de configurare pot cauza pierderi ireversibile fără backup."
+    "rationale": "Datele transmise necriptat pot fi interceptate în orice punct al rețelei. TLS este standardul minim și este obligatoriu pentru orice serviciu web sau API.",
+    "level_criteria": {
+      "l1": "Tot traficul de rețea cu date sensibile sau autentificare utilizează TLS 1.2 sau 1.3. Certificatele SSL/TLS sunt gestionate cu reînnoire automată și nu există certificate expirate în producție. HTTP plain este redirecționat forțat la HTTPS.",
+      "l2": "TLS 1.0 și 1.1 sunt dezactivate pe toate serviciile. Configurația TLS este validată cu instrumente (SSL Labs, testssl.sh) și atinge minimum nota A. HSTS (HTTP Strict Transport Security) este activat pentru toate domeniile publice.",
+      "l3": "Certificate Transparency (CT) monitoring detectează certificatele neautorizate emise pentru domeniile organizației. Mutual TLS (mTLS) este implementat pentru comunicațiile service-to-service sensibile. Rotația certificatelor este complet automatizată cu zero downtime."
+    }
   },
   {
     "id": "INC-01",
     "domain": "INC",
-    "title": "Plan documentat de răspuns la incidente",
-    "description": "Organizația trebuie să aibă un plan documentat de răspuns la incidente de securitate cibernetică, cu roluri și responsabilități definite, proceduri de escaladare, contacte externe (CERT-RO, ANSSI, furnizori IR) și criterii de clasificare a incidentelor.",
-    "tier": 1,
+    "title": "Plan de răspuns la incidente și notificare NIS2",
+    "description": "Organizația trebuie să aibă un plan documentat de răspuns la incidente cu roluri, responsabilități, proceduri de escaladare și contacte externe (CERT-RO, DNSC, furnizori IR). Planul trebuie să includă procedura de notificare a incidentelor semnificative la DNSC în maximum 24 ore (notificare preliminară) și 72 ore (raport complet), conform NIS2 Art. 23(4).",
     "nis2_mapped": true,
-    "nis2_article": "Art. 21(2)(c)",
+    "nis2_article": "Art. 21(2)(c), Art. 23(4)",
     "geo155_mapped": true,
-    "geo155_reference": "Art. 7(1)",
+    "geo155_reference": "Art. 7(1), Art. 9(1)",
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": false,
-    "rationale": "Organizațiile fără plan de răspuns pierd în medie 3x mai mult timp să conțină un incident. Planul documentat transformă haosul inevitabil al unui incident în acțiuni coordonate."
+    "rationale": "Organizațiile fără plan de răspuns pierd în medie 3x mai mult timp să conțină un incident. Procedura de notificare NIS2 este obligatoriu legală — integrarea ei în planul de IR asigură că termenele de 24/72 ore sunt respectate chiar în condiții de criză.",
+    "level_criteria": {
+      "l1": "Organizația are un plan documentat de răspuns la incidente cu roluri, responsabilități, proceduri de escaladare, contacte externe și criterii de clasificare a incidentelor, revizuit în ultimele 12 luni. Planul include procedura de notificare DNSC în 24/72 ore cu persoana responsabilă și datele de contact accesibile 24/7. Un exercițiu de simulare este realizat anual.",
+      "l2": "Planul include playbook-uri specifice pentru tipuri de incidente frecvente (ransomware, phishing, breșă de date, DDoS) cu criterii clare pentru definirea unui incident semnificativ NIS2. Un jurnal al incidentelor raportate și neraportate este menținut cu justificarea deciziei. Exerciții tabletop semestriale testează și procedura de notificare.",
+      "l3": "Organizația participă la exerciții multi-actor cu scenarii complexe. Planul de IR este integrat cu Planul de Business Continuity. Generarea automată a rapoartelor preliminare DNSC din datele SIEM reduce timpul de notificare. Capacitățile de răspuns sunt măsurate prin MTTD și MTTR cu ținte definite. Organizația participă la schimbul de threat intelligence prin ISAC/CERT."
+    }
   },
   {
     "id": "INC-02",
     "domain": "INC",
-    "title": "Notificarea incidentelor NIS2 în 24/72 ore",
-    "description": "Organizațiile NIS2 trebuie să notifice DNSC (Directoratul Național de Securitate Cibernetică) în maximum 24 ore de la detectarea unui incident semnificativ (notificare preliminară) și în 72 ore cu detalii complete. Procedura de notificare trebuie documentată.",
-    "tier": 1,
-    "nis2_mapped": true,
-    "nis2_article": "Art. 23(4)",
-    "geo155_mapped": true,
-    "geo155_reference": "Art. 9(1)",
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": false,
-    "rationale": "Termenele de notificare NIS2 sunt obligatorii legal. Nerespectarea lor atrage amenzi semnificative. Procedura pre-documentată asigură că notificarea se face în timp, chiar în condiții de criză."
-  },
-  {
-    "id": "INC-03",
-    "domain": "INC",
     "title": "Logging centralizat și SIEM",
     "description": "Logurile din toate sistemele critice (AD, firewall, endpoint, cloud, aplicații) trebuie colectate centralizat într-un SIEM (Microsoft Sentinel, Splunk, Elastic SIEM). Retenție minimum 12 luni, alertare automată pentru evenimentele de securitate.",
-    "tier": 2,
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": false,
@@ -432,14 +372,18 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": true,
-    "rationale": "Fără logging centralizat, investigarea incidentelor este lentă și incompletă. SIEM reduce timpul mediu de detecție (MTTD) și oferă baza pentru alertare proactivă."
+    "rationale": "Fără logging centralizat, investigarea incidentelor este lentă și incompletă. SIEM reduce timpul mediu de detecție (MTTD) și oferă baza pentru alertare proactivă.",
+    "level_criteria": {
+      "l1": "Logurile din toate sistemele critice (Active Directory, firewall, EDR, cloud, aplicații principale) sunt colectate centralizat cu retenție minimum 12 luni. Reguli de alertare automată sunt configurate pentru evenimentele principale de securitate (autentificări eșuate, escaladare privilegii, modificări politici).",
+      "l2": "Alertele SIEM sunt investigate și documentate cu SLA definit (critice în 1 oră, înalte în 4 ore). Regulile de detecție acoperă principalele tactici MITRE ATT&CK. Rapoarte săptămânale de securitate sunt generate din SIEM și revizuite.",
+      "l3": "SIEM este integrat cu SOAR pentru investigare și containment automat al incidentelor comune. Threat hunting proactiv utilizează telemetria SIEM pentru căutarea amenințărilor persistente. Regulile de detecție sunt testate și actualizate lunar."
+    }
   },
   {
-    "id": "INC-04",
+    "id": "INC-03",
     "domain": "INC",
-    "title": "Capacitate de izolare a sistemelor compromise",
-    "description": "Proceduri documentate și testate pentru izolarea rapidă a sistemelor sau segmentelor de rețea compromise. Capabilitate de izolare în maximum 30 minute de la decizie. Acces out-of-band pentru administrare post-izolare.",
-    "tier": 2,
+    "title": "Containment și investigare criminalistică",
+    "description": "Proceduri documentate și testate pentru izolarea rapidă a sistemelor sau segmentelor de rețea compromise, cu capabilitate de izolare în maximum 30 de minute de la decizie și acces out-of-band pentru administrare post-izolare. Organizația trebuie să aibă acces la capabilități de investigare criminalistică digitală (intern sau prin contract IR), cu procese de colectare și prezervare a dovezilor documentate.",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(c)",
     "geo155_mapped": false,
@@ -447,59 +391,37 @@
     "eu_ai_act_mapped": false,
     "eu_ai_act_article": null,
     "auto_verifiable": false,
-    "rationale": "Viteza de izolare este factorul cel mai critic în limitarea propagării ransomware. Fiecare minut de întârziere permite criptarea mai multor sisteme."
-  },
-  {
-    "id": "INC-05",
-    "domain": "INC",
-    "title": "Investigare criminalistică digitală (forensics)",
-    "description": "Organizația trebuie să aibă acces la capabilități de investigare criminalistică digitală, fie intern (instruire, instrumente) fie prin contract cu un furnizor IR. Procesele de colectare și prezervare a dovezilor digitale trebuie documentate.",
-    "tier": 3,
-    "nis2_mapped": true,
-    "nis2_article": "Art. 21(2)(c)",
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": false,
-    "eu_ai_act_article": null,
-    "auto_verifiable": false,
-    "rationale": "Investigarea criminalistică este necesară pentru înțelegerea completă a unui incident, identificarea vectorului de atac și prevenirea recidivei. Fără ea, aceleași vulnerabilități rămân exploatabile."
+    "rationale": "Viteza de izolare este factorul cel mai critic în limitarea propagării ransomware — fiecare minut permite criptarea mai multor sisteme. Investigarea criminalistică este necesară pentru înțelegerea completă a incidentului și prevenirea recidivei prin aceleași vulnerabilități.",
+    "level_criteria": {
+      "l1": "Există proceduri documentate și testate pentru izolarea sistemelor compromise în maximum 30 de minute fără acces fizic, cu cale de administrare out-of-band funcțională, testate cel puțin semestrial. Organizația are acces documentat la capabilități forensice (intern sau contract activ IR), cu proceduri de colectare a dovezilor respectând lanțul de custodie, testate în ultimele 12 luni.",
+      "l2": "Izolarea poate fi inițiată cu un singur pas (one-click isolation) prin consola EDR sau SOAR, cu sistemul accesibil post-izolare pentru investigare dar fără acces la rețea. Instrumentele forensice sunt pre-instalate sau disponibile imediat; imaginile forensice pot fi realizate fără oprirea sistemelor (live forensics).",
+      "l3": "Izolarea automată bazată pe reguli este implementată: sisteme care declanșează alerte critice sunt izolate automat cu notificare imediată. Microsegmentarea rețelei limitează propagarea fără a afecta alte segmente. Threat intelligence corelează indicatorii de compromitere cu feed-uri globale, iar memoria volatilă (RAM) este capturată automat la alertele critice."
+    }
   },
   {
     "id": "AIS-01",
     "domain": "AIS",
-    "title": "Politică de utilizare acceptabilă a AI",
-    "description": "Organizația trebuie să aibă o politică documentată de utilizare a instrumentelor AI, care să specifice: ce instrumente AI sunt permise, ce categorii de date NU pot fi introduse în sisteme AI publice (date confidențiale, date cu caracter personal, secrete de afaceri, cod sursă proprietar), și cerințe de revizuire umană pentru conținutul generat de AI utilizat în decizii de afaceri.",
-    "tier": 1,
+    "title": "Politică de utilizare și inventar AI",
+    "description": "Organizația trebuie să aibă o politică documentată de utilizare a instrumentelor AI, specificând ce instrumente sunt permise, ce categorii de date NU pot fi introduse în sisteme AI publice și cerințe de revizuire umană. Concomitent, se menține un inventar actualizat al tuturor instrumentelor AI (aprobate și neautorizate), cu blocare la nivel de proxy/firewall a celor neaprobate.",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(a)",
     "geo155_mapped": false,
     "geo155_reference": null,
     "eu_ai_act_mapped": true,
-    "eu_ai_act_article": "Art. 50",
-    "auto_verifiable": false,
-    "rationale": "Angajații care introduc date sensibile în ChatGPT sau alte LLM-uri publice reprezintă cel mai frecvent vector de scurgere de date AI. O politică clară și comunicată reduce semnificativ riscul înainte de implementarea oricăror controale tehnice."
+    "eu_ai_act_article": "Art. 26, Art. 50",
+    "auto_verifiable": true,
+    "rationale": "Angajații care introduc date sensibile în LLM-uri publice reprezintă cel mai frecvent vector de scurgere AI. Politica fără inventar este neaplicabilă, iar inventarul fără politică este fără direcție — cele două se implementează împreună pentru control real.",
+    "level_criteria": {
+      "l1": "Organizația are o politică documentată de utilizare AI (instrumente permise, date interzise, revizuire umană obligatorie) comunicată și confirmată de toți angajații. Un inventar actualizat al instrumentelor AI utilizate este menținut, inclusiv cele neautorizate identificate, iar instrumentele neaprobate sunt blocate la nivel de proxy sau firewall. Procesul de aprobare include evaluarea modului de procesare a datelor de către furnizor.",
+      "l2": "Politica include cerințe specifice pentru funcțiile cu risc ridicat (financiar, juridic, HR, comunicare externă). Instruirea anuală privind utilizarea responsabilă a AI este obligatorie. Inventarul include tipul de date procesate, temeiul legal și riscurile per instrument, cu revizuire lunară pentru adoptări necontrolate noi și evaluare de securitate și conformitate GDPR a furnizorilor.",
+      "l3": "Organizația are un program de guvernanță AI formalizat cu un responsabil desemnat, integrat în managementul riscului organizațional. Monitorizarea continuă a traficului de rețea detectează utilizarea instrumentelor AI neautorizate în timp real. Furnizorii AI sunt evaluați anual privind securitatea și conformitatea, cu clauze contractuale specifice."
+    }
   },
   {
     "id": "AIS-02",
     "domain": "AIS",
-    "title": "Inventarul instrumentelor AI și prevenirea Shadow AI",
-    "description": "Menținerea unui inventar actualizat al tuturor instrumentelor AI utilizate în organizație (aprobate și neautorizate). Blocarea la nivel de proxy/firewall a instrumentelor AI neautorizate. Revizuire lunară pentru identificarea noilor adoptări necontrolate. Procesul de aprobare pentru instrumente AI noi trebuie să includă evaluarea modului în care furnizorul procesează datele transmise.",
-    "tier": 1,
-    "nis2_mapped": true,
-    "nis2_article": "Art. 21(2)(e)",
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": true,
-    "eu_ai_act_article": "Art. 26",
-    "auto_verifiable": true,
-    "rationale": "20% dintre organizații au suferit o breșă din cauza Shadow AI în ultimul an. Angajații adoptă instrumente AI fără evaluare de securitate — vizibilitatea este primul pas de control."
-  },
-  {
-    "id": "AIS-03",
-    "domain": "AIS",
     "title": "Prevenirea exfiltrării datelor prin instrumente AI",
-    "description": "Implementarea de reguli DLP (Data Loss Prevention) care să detecteze și blocheze transmiterea datelor confidențiale sau cu caracter personal către API-uri AI externe. Monitorizarea traficului către endpoint-uri AI cunoscute (api.openai.com, etc.). Cheile API pentru servicii AI trebuie gestionate prin vault (referință IAM-06) și niciodată hard-codate.",
-    "tier": 1,
+    "description": "Implementarea de reguli DLP (Data Loss Prevention) care să detecteze și blocheze transmiterea datelor confidențiale sau cu caracter personal către API-uri AI externe. Monitorizarea traficului către endpoint-uri AI cunoscute (api.openai.com etc.). Cheile API pentru servicii AI trebuie gestionate prin vault și niciodată hard-codate.",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(h)",
     "geo155_mapped": true,
@@ -507,36 +429,30 @@
     "eu_ai_act_mapped": true,
     "eu_ai_act_article": "Art. 26",
     "auto_verifiable": true,
-    "rationale": "Scurgerile de date prin instrumente AI sunt dificil de detectat post-factum — datele transmise unui LLM pot fi folosite pentru antrenament sau accesate de alți utilizatori. Controalele tehnice sunt esențiale alături de politica AIS-01."
+    "rationale": "Scurgerile de date prin instrumente AI sunt dificil de detectat post-factum — datele transmise unui LLM pot fi folosite pentru antrenament sau accesate de alți utilizatori. Controalele tehnice sunt esențiale alături de politica AIS-01.",
+    "level_criteria": {
+      "l1": "Reguli DLP sunt implementate și active pentru detectarea și blocarea transmiterii datelor confidențiale sau personale către API-uri AI externe cunoscute. Traficul către endpoint-uri AI principale este monitorizat. Cheile API AI sunt gestionate prin vault și nu sunt stocate în text clar.",
+      "l2": "Regulile DLP acoperă atât traficul web (browser) cât și aplicațiile desktop și API-urile. Rapoartele DLP sunt revizuite săptămânal, iar incidentele sunt investigate și documentate. Listele de endpoint-uri AI monitorizate sunt actualizate lunar.",
+      "l3": "Deep packet inspection a traficului AI permite analiza conținutului transmis, nu doar blocarea domeniului. Anomalii în volumul de date transmise către servicii AI generează alertă investigată automat. Clasificarea automată a datelor (DAT-01) alimentează regulile DLP în timp real."
+    }
   },
   {
-    "id": "AIS-04",
+    "id": "AIS-03",
     "domain": "AIS",
-    "title": "Supraveghere umană pentru decizii AI",
-    "description": "Orice decizie de afaceri semnificativă asistată de AI (screening CV-uri, aprobări financiare, comunicări externe, cod în producție) trebuie revizuită și aprobată de o persoană competentă înainte de implementare. Sistemele AI agentice (care acționează autonom) trebuie să aibă restricții explicite privind autonomia și să înregistreze toate acțiunile întreprinse.",
-    "tier": 2,
+    "title": "Guvernanță AI și conformitate EU AI Act",
+    "description": "Orice decizie de afaceri semnificativă asistată de AI (screening CV-uri, aprobări financiare, comunicări externe, cod în producție) trebuie revizuită și aprobată de o persoană competentă. Organizațiile care utilizează sisteme AI cu risc ridicat (conform Anexei III EU AI Act) trebuie să desemneze un responsabil de supraveghere, să mențină documentație tehnică actualizată, să înregistreze deciziile AI (minimum 6 luni) și să efectueze o evaluare a impactului asupra drepturilor fundamentale (Art. 27).",
     "nis2_mapped": true,
     "nis2_article": "Art. 21(2)(b)",
     "geo155_mapped": false,
     "geo155_reference": null,
     "eu_ai_act_mapped": true,
-    "eu_ai_act_article": "Art. 26",
+    "eu_ai_act_article": "Art. 26, Art. 27, Art. 29",
     "auto_verifiable": false,
-    "rationale": "Sistemele AI comit erori factuale, pot fi manipulate prin prompt injection și nu înțeleg contextul organizațional. Supravegherea umană previne decizii eronate cu impact operațional sau reputațional."
-  },
-  {
-    "id": "AIS-05",
-    "domain": "AIS",
-    "title": "Conformitate EU AI Act pentru sisteme AI cu risc ridicat",
-    "description": "Organizațiile care utilizează sau implementează sisteme AI cu risc ridicat (conform Anexei III din EU AI Act: biometrie, infrastructură critică, angajare, educație, servicii esențiale) trebuie să: desemneze o persoană responsabilă cu supravegherea sistemului, mențină documentație tehnică actualizată, înregistreze toate deciziile AI (minimum 6 luni), efectueze o evaluare a impactului asupra drepturilor fundamentale (Art. 27) înainte de implementare și raporteze incidente semnificative la ANPC/DNSC.",
-    "tier": 3,
-    "nis2_mapped": true,
-    "nis2_article": "Art. 21(2)(c)",
-    "geo155_mapped": false,
-    "geo155_reference": null,
-    "eu_ai_act_mapped": true,
-    "eu_ai_act_article": "Art. 26, 27, 29",
-    "auto_verifiable": false,
-    "rationale": "EU AI Act devine aplicabil pentru sisteme cu risc ridicat în august 2026. Neconformitatea atrage amenzi de până la 3% din cifra de afaceri globală (reducere 50% pentru IMM-uri). Implementarea timpurie a documentației și supravegherii evită costurile de remediere în criză."
+    "rationale": "Sistemele AI comit erori factuale și pot fi manipulate prin prompt injection. EU AI Act devine aplicabil pentru sisteme cu risc ridicat în august 2026, cu amenzi de până la 3% din cifra de afaceri (50% reducere IMM-uri). Supravegherea umană și conformitatea legală se implementează eficient împreună.",
+    "level_criteria": {
+      "l1": "Orice decizie de afaceri semnificativă asistată de AI este revizuită și aprobată de o persoană competentă, documentat. Organizația a identificat toate sistemele AI cu risc ridicat (Anexa III EU AI Act) cu câte un responsabil de supraveghere desemnat și documentație tehnică actualizată. Incidentele semnificative AI sunt raportate la ANPC/DNSC conform termenelor legale.",
+      "l2": "Procesul de revizuire umană este formalizat cu criterii clare despre ce constituie o decizie semnificativă; revizuirea include verificarea acurateței, datelor personale neautorizate și conținutului inadecvat. Înregistrarea deciziilor AI pentru sisteme cu risc ridicat este implementată cu retenție minimum 6 luni. Evaluarea impactului asupra drepturilor fundamentale (Art. 27) este realizată și documentată. Instruirea anuală a operatorilor sistemelor AI cu risc ridicat este obligatorie.",
+      "l3": "Organizația implementează un framework de evaluare continuă a performanței și fiabilității sistemelor AI, cu detecție automată a abaterilor și escalare. Post-market surveillance pentru sistemele cu risc ridicat este implementată cu raportare la autorități. Evaluarea biasului și a impactului deciziilor AI este integrată în procesul de guvernanță."
+    }
   }
 ]
