@@ -2,6 +2,35 @@
 
 All notable changes to CyberBaseline are documented here.
 
+## [3.0.0] — 2026-04-20
+
+### Schema simplification: NIS2-only regulatory mapping
+
+**Design goal:** Remove regulatory noise. NIS2 covers 100% of controls and is the framework's primary audience. GEO 155/2024 and EU AI Act mappings added metadata complexity with minimal value for most users.
+
+#### Schema changes
+
+- **Removed fields**: `nis2_mapped`, `geo155_mapped`, `geo155_reference`, `eu_ai_act_mapped`, `eu_ai_act_article`
+- **Kept**: `nis2_article` (string | null) — the specific article is the value; null means the control is security best practice not directly tied to a NIS2 article
+- **Result**: 8 fields per control (down from 13) — flat, readable, easy to extend
+
+#### Content changes
+
+- **AIS-03** title updated: "Guvernanță AI și conformitate EU AI Act" → "Guvernanță AI și supraveghere umană" — removes EU AI Act branding; the security substance (human oversight, decision logging, governance) is unchanged
+- **AIS-03** description and rationale: removed EU AI Act enforcement-specific language; control remains valid on its security merits
+
+#### Why not GEO 155/2024?
+
+GEO 155/2024 is a Romanian national regulation that largely mirrors NIS2 for critical sectors. It covered only 9 of 24 controls (37.5%) with no dedicated filter in the UI. Dropping it removes a Romania-only dependency without losing any security coverage.
+
+#### Why not EU AI Act?
+
+Only 3 controls in the AIS domain were mapped (12.5%). AI security controls (shadow AI, DLP for AI, human oversight) are justified on security grounds independent of the EU AI Act. A dedicated AI Act compliance framework is a better vehicle for that regulation.
+
+**Updated schema**: 8 fields per control · NIS2-only · 24 controls · 7 domains unchanged
+
+---
+
 ## [2.0.0] — 2026-04-20
 
 ### Simplified: 36 → 24 controls, full NIS2 coverage maintained
