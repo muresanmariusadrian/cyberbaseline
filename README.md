@@ -4,9 +4,8 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![NIS2](https://img.shields.io/badge/NIS2-aligned-blue)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555)
-[![GEO 155/2024](https://img.shields.io/badge/GEO%20155%2F2024-aligned-blue)](https://legislatie.just.ro)
 
-An open-source cybersecurity framework designed for organizations without dedicated security teams. **31 practical controls**, organized across **6 domains** and **3 maturity tiers**, aligned with NIS2 and Romanian GEO 155/2024.
+An open-source cybersecurity framework designed for organizations without dedicated security teams. **24 practical controls**, organized across **7 domains** and **3 maturity levels**, aligned with NIS2.
 
 ---
 
@@ -29,32 +28,31 @@ CyberBaseline is built around these real threats, not an exhaustive academic tax
 
 | Abbr | Domain | Controls |
 |------|--------|----------|
-| [IAM](domains/IAM.md) | Identity & Access Management | 6 |
-| [EML](domains/EML.md) | Email Security | 4 |
-| [NET](domains/NET.md) | Network & Infrastructure | 7 |
-| [EPT](domains/EPT.md) | Endpoint Protection | 4 |
-| [DAT](domains/DAT.md) | Data Protection | 5 |
-| [INC](domains/INC.md) | Incident Management | 5 |
-| [AIS](domains/AIS.md) | AI Security | 5 |
+| [IAM](domains/IAM.md) | Identity & Access Management | 4 |
+| [EML](domains/EML.md) | Email Security | 3 |
+| [NET](domains/NET.md) | Network & Infrastructure | 5 |
+| [EPT](domains/EPT.md) | Endpoint Protection | 3 |
+| [DAT](domains/DAT.md) | Data Protection | 3 |
+| [INC](domains/INC.md) | Incident Management | 3 |
+| [AIS](domains/AIS.md) | AI Security | 3 |
 
-**Total: 36 controls**
+**Total: 24 controls**
 
-### Maturity tiers
+### Maturity levels
 
-| Tier | Label | Controls | Description |
-|------|-------|----------|-------------|
-| T1 | **Essential** | 29 | Foundational controls required for minimum NIS2 compliance. Fast to implement, immediate impact. |
-| T2 | **Advanced** | 4 | Recommended for organizations with moderate risk profiles or sensitive data. |
-| T3 | **Resilient** | 3 | Controls for organizations in essential or important sectors under NIS2 and EU AI Act. |
+| Level | Label | Description |
+|-------|-------|-------------|
+| L1 | **Minim** | All 24 controls implemented at baseline — essential measures documented and functional. |
+| L2 | **Bun** | All 24 controls implemented at intermediate depth — consolidated, tested, and partially automated. |
+| L3 | **Puternic** | All 24 controls implemented at advanced level — automated and continuously monitored. |
+
+An organization's maturity is determined by the deepest level at which **all** controls are implemented.
 
 ---
 
-## NIS2, GEO 155/2024, and EU AI Act compliance
+## NIS2 compliance
 
-All controls are mapped to relevant articles in:
-- **NIS2 Directive** (EU 2022/2555)
-- **GEO 155/2024** — NIS2 transposition into Romanian law
-- **EU AI Act** (EU 2024/1689) — AI security controls mapped to deployer obligations (Art. 26, 27, 29, 50)
+All controls are mapped to relevant articles in the **NIS2 Directive** (EU 2022/2555).
 
 Organizations in essential sectors (energy, transport, health, finance, water, digital infrastructure) and important sectors (postal, waste management, manufacturing, digital services) have legal compliance obligations.
 
@@ -63,7 +61,7 @@ Organizations in essential sectors (energy, transport, health, finance, water, d
 ## How to use this framework
 
 ### 1. Assess your current state
-Go through T1 controls and check what you already have in place. Most SMBs implement 40–60% of T1 without realizing it.
+Go through the controls and check what you already have in place. Most SMBs implement 40–60% of L1 without realizing it.
 
 ### 2. Prioritize by impact
 Start with:
@@ -73,10 +71,10 @@ Start with:
 - **EML-01** (SPF/DKIM/DMARC) — stops domain spoofing
 
 ### 3. Document your implementation
-Each control has clear criteria. Document what you've implemented, when, and how — useful for audits and NIS2 notifications.
+Each control has clear criteria for L1, L2, and L3. Document what you've implemented, when, and how — useful for audits and NIS2 notifications.
 
-### 4. Progress to T2 and T3
-Once T1 is fully implemented, evaluate T2 controls based on your organization's risk profile.
+### 4. Progress through levels
+Once all controls are at L1, evaluate L2 criteria based on your organization's risk profile.
 
 ---
 
@@ -84,7 +82,7 @@ Once T1 is fully implemented, evaluate T2 controls based on your organization's 
 
 | File | Contents |
 |------|----------|
-| [`controls.json`](controls.json) | All controls in JSON format (source of truth, includes EU AI Act mappings) |
+| [`controls.json`](controls.json) | All controls in JSON format (source of truth) |
 | [`domains/IAM.md`](domains/IAM.md) | Identity & Access Management |
 | [`domains/EML.md`](domains/EML.md) | Email Security |
 | [`domains/NET.md`](domains/NET.md) | Network & Infrastructure |
@@ -99,7 +97,7 @@ Once T1 is fully implemented, evaluate T2 controls based on your organization's 
 
 Contributions are welcome — especially:
 - Corrections or clarifications to control descriptions
-- Additional NIS2 / GEO 155 mappings
+- Additional NIS2 mappings
 - Practical implementation examples
 
 Open an **Issue** for discussion or a **Pull Request** for direct changes.
